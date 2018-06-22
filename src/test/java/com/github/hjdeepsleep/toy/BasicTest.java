@@ -2,6 +2,7 @@ package com.github.hjdeepsleep.toy;
 
 import com.github.hjdeepsleep.toy.domain.Member;
 import com.github.hjdeepsleep.toy.domain.Team;
+import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 import static com.github.hjdeepsleep.toy.domain.QMember.member;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -94,5 +96,29 @@ public class BasicTest {
 
         //then
         assertTrue(findMember.getUsername().equals("member1"));
+    }
+
+    @DisplayName("결과 조회 하기")
+    @Test
+    public void get_result() throws Exception {
+        List<Member> fetch = queryFactory
+                .selectFrom(member)
+                .fetch();
+
+        Member fetchOne = queryFactory
+                .selectFrom(member)
+                .fetchOne();
+
+        Member fetchFirst = queryFactory
+                .selectFrom(member)
+                .fetchFirst(); // .limit(1).fetchOne()
+
+        QueryResults<Member> results = queryFactory
+                .selectFrom(member)
+                .fetchResults();
+
+        results.getTotal(); //count 쿼리 실행
+        results.getLimit();
+        List<Member> results1 = results.getResults(); //데이터 조회 쿼리 실행
     }
 }
