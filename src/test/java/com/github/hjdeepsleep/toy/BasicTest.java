@@ -20,9 +20,12 @@ public class BasicTest {
 
     @Autowired
     EntityManager em;
+    JPAQueryFactory queryFactory;
 
     @BeforeEach
     public void before() {
+        queryFactory = new JPAQueryFactory(em);
+
         Team teamA = new Team("teamA");
         Team teamB = new Team("teamB");
 
@@ -54,7 +57,6 @@ public class BasicTest {
 
     @Test
     public void startQuerydsl() throws Exception {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         QMember m = QMember.member;
 
         Member findMember = queryFactory
