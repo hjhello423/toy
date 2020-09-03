@@ -23,7 +23,6 @@ class MemberTest {
 
     @Test
     public void testEntity() throws Exception {
-        //given
         Team teamA = new Team("teamA");
         Team teamB = new Team("teamB");
 
