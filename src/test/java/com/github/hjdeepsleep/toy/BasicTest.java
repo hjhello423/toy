@@ -1,7 +1,6 @@
 package com.github.hjdeepsleep.toy;
 
 import com.github.hjdeepsleep.toy.domain.Member;
-import com.github.hjdeepsleep.toy.domain.QMember;
 import com.github.hjdeepsleep.toy.domain.Team;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
+import static com.github.hjdeepsleep.toy.domain.QMember.member;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -57,12 +57,10 @@ public class BasicTest {
 
     @Test
     public void startQuerydsl() throws Exception {
-        QMember m = QMember.member;
-
         Member findMember = queryFactory
-                .selectFrom(m)
-                .from(m)
-                .where(m.username.eq("member1"))
+                .selectFrom(member)
+                .from(member)
+                .where(member.username.eq("member1"))
                 .fetchOne();
 
         assertTrue(findMember.getUsername().equals("member1"));
