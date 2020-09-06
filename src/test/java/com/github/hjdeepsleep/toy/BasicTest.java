@@ -4,6 +4,7 @@ import com.github.hjdeepsleep.toy.domain.Member;
 import com.github.hjdeepsleep.toy.domain.Team;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,6 +44,7 @@ public class BasicTest {
         em.persist(member4);
     }
 
+    @DisplayName("JPQL로 조회")
     @Test
     public void startJPQL() throws Exception {
         String qlString = "select m from Member m " +
@@ -55,6 +57,7 @@ public class BasicTest {
         assertTrue(findMember.getUsername().equals("member1"));
     }
 
+    @DisplayName("querydsl 이용")
     @Test
     public void startQuerydsl() throws Exception {
         Member findMember = queryFactory
@@ -63,6 +66,33 @@ public class BasicTest {
                 .where(member.username.eq("member1"))
                 .fetchOne();
 
+        assertTrue(findMember.getUsername().equals("member1"));
+    }
+
+    @DisplayName("조건 쿼리 하기")
+    @Test
+    public void search() throws Exception {
+        //given
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1")
+                        .and(member.age.eq(10)))
+                .fetchOne();
+
+        //then
+        assertTrue(findMember.getUsername().equals("member1"));
+    }
+
+    @Test
+    public void search_and_param() throws Exception {
+        //given
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1"), // ',' 이용하여 전달 해도 and로 묶어준다
+                        (member.age.eq(10)))
+                .fetchOne();
+
+        //then
         assertTrue(findMember.getUsername().equals("member1"));
     }
 }
