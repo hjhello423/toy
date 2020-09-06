@@ -1,6 +1,5 @@
 package com.github.hjdeepsleep.toy.lambda_study;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppleTest {
@@ -90,7 +88,7 @@ class AppleTest {
         copy2.sort(byWeightInference);
 
         //then
-        assertTrue(copy1. equals(copy2));
+        assertTrue(copy1.equals(copy2));
     }
 
     @DisplayName("람다에서 확인된 예외 처리 하기(AppleFunctionInterface)")
@@ -103,5 +101,71 @@ class AppleTest {
                 throw new RuntimeException();
             }
         };
+    }
+
+    @DisplayName("람다의 자유 변수 사용")
+    @Test
+    public void capturing() throws Exception {
+        //given
+        final int number = 10; //자유 변수
+
+        //when
+        Runnable r = () -> System.out.println(number); //자유 변수 사용
+
+        //then
+        r.run();
+    }
+
+    @DisplayName("람다에서 사용한 자유 변수의 제약 - final")
+    @Test
+    public void capturing_val() throws Exception {
+        //given
+        int number = 10; //자유 변수
+
+        //when
+        Runnable r = () -> System.out.println(number); //자유 변수 사용
+
+        //then
+//        number = 20; //람다에서 사용한 자유 변수의 재 초기화로 인해 compile 불가능
+    }
+
+
+    @DisplayName("메서드 참조 이용")
+    @Test
+    public void method_ref() throws Exception {
+        //given
+        List<String> target1 = Arrays.asList("a", "c", "d", "b");
+        List<String> target2 = Arrays.asList("a", "c", "d", "b");
+
+        //when
+        target1.sort((s1, s2) -> s1.compareTo(s2));
+        target2.sort(String::compareTo); //메서드 참조 사용
+
+        //then
+        assertTrue(target1.equals(target2));
+    }
+
+    @DisplayName("map을 이용한 apple generator")
+    @Test
+    public void generate_apple() throws Exception {
+        //given
+        List<Integer> weights = Arrays.asList(1, 3, 5, 7, 9);
+
+        //when
+        List<Apple> apples = map(weights, Apple::new);
+
+        //then
+        System.out.println(apples);
+        assertTrue(apples.contains(new Apple(1)));
+    }
+
+    private List<Apple> map(List<Integer> list, Function<Integer, Apple> f) {
+        List<Apple> result = new ArrayList<>();
+
+        for (Integer i : list) {
+            result.add(f.apply(i));
+        }
+
+        return result;
     }
 }
