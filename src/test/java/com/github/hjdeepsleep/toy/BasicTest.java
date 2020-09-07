@@ -3,6 +3,7 @@ package com.github.hjdeepsleep.toy;
 import com.github.hjdeepsleep.toy.domain.Member;
 import com.github.hjdeepsleep.toy.domain.Team;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +16,8 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.github.hjdeepsleep.toy.domain.QMember.member;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.github.hjdeepsleep.toy.domain.QTeam.team;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -103,11 +105,11 @@ public class BasicTest {
     public void get_result() throws Exception {
         List<Member> fetch = queryFactory
                 .selectFrom(member)
-                .fetch();
+                .fetch(); //리스트 반환
 
         Member fetchOne = queryFactory
                 .selectFrom(member)
-                .fetchOne();
+                .fetchOne(); //단 건 조회
 
         Member fetchFirst = queryFactory
                 .selectFrom(member)
@@ -120,5 +122,124 @@ public class BasicTest {
         results.getTotal(); //count 쿼리 실행
         results.getLimit();
         List<Member> results1 = results.getResults(); //데이터 조회 쿼리 실행
+
+        queryFactory
+                .selectFrom(member)
+                .fetchCount(); //count 조회
     }
+
+    /**
+     * 1. 회원 나이 내림차순(desc)
+     * 2. 회원 이름 올림차순(asc)
+     * 단, 2에서 회원 이름이 없으면 마지막에 출력(null last)
+     */
+    @DisplayName("정렬")
+    @Test
+    public void sort() throws Exception {
+        em.persist(new Member(null, 100));
+        em.persist(new Member("member5", 100));
+        em.persist(new Member("member6", 100));
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.eq(100))
+                .orderBy(member.age.desc(), member.username.asc().nullsLast())
+                .fetch();
+
+        Member member5 = result.get(0);
+        Member member6 = result.get(1);
+        Member memberNull = result.get(2);
+
+        assertTrue(member5.getUsername().equals("member5"));
+        assertTrue(member6.getUsername().equals("member6"));
+        assertNull(memberNull.getUsername());
+    }
+
+    @DisplayName("페이징")
+    @Test
+    public void paging1() throws Exception {
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetch();
+
+        assertEquals(result.size(), 2);
+    }
+
+    @DisplayName("페이징 - 전체 조회 수")
+    @Test
+    public void paging2() throws Exception {
+        QueryResults<Member> result = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetchResults();
+
+        assertEquals(result.getTotal(), 4);
+        assertEquals(result.getLimit(), 2);
+        assertEquals(result.getOffset(), 1);
+        assertEquals(result.getResults().size(), 2);
+    }
+
+    @DisplayName("집함 함수")
+    @Test
+    public void aggregation() throws Exception {
+        List<Tuple> result = queryFactory
+                .select(
+                        member.count(),
+                        member.age.sum(),
+                        member.age.avg(),
+                        member.age.max(),
+                        member.age.min()
+                )
+                .from(member)
+                .fetch();
+
+        Tuple tuple = result.get(0);
+        assertEquals(tuple.get(member.count()), 4);
+        assertEquals(tuple.get(member.age.sum()), 100);
+        assertEquals(tuple.get(member.age.avg()), 25);
+        assertEquals(tuple.get(member.age.max()), 40);
+        assertEquals(tuple.get(member.age.min()), 10);
+    }
+
+    /**
+     * 팀의 이름과 각 팀의 평균 연령을 구해라
+     */
+    @DisplayName("groupby")
+    @Test
+    public void groupby() throws Exception {
+        List<Tuple> result = queryFactory
+                .select(team.name, member.age.avg())
+                .from(member)
+                .join(member.team, team)
+                .groupBy(team.name)
+                .fetch();
+
+        Tuple teamA = result.get(0);
+        Tuple teamB = result.get(1);
+
+        assertEquals(teamA.get(team.name), "teamA");
+        assertEquals(teamA.get(member.age.avg()), 15);
+        assertEquals(teamB.get(team.name), "teamB");
+        assertEquals(teamB.get(member.age.avg()), 35);
+    }
+
+    /**
+     * 팀 A에 소속된 모든 회원 찾기
+     */
+    @DisplayName("join")
+    @Test
+    public void join() throws Exception {
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .join(member.team, team)
+                .where(team.name.eq("teamA"))
+                .fetch();
+    }
+
+
 }
