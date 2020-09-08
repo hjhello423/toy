@@ -13,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 import static com.github.hjdeepsleep.toy.domain.QMember.member;
@@ -241,5 +243,110 @@ public class BasicTest {
                 .fetch();
     }
 
+    /**
+     * 세타 조인
+     * 회원의 이름이 팀 이름과 같은 회원 조회
+     *
+     * @throws Exception
+     */
+    @DisplayName("연관 관계가 없는 테이블의 조인")
+    @Test
+    public void theta_join() throws Exception {
+        //given
+        em.persist(new Member("teamA"));
+        em.persist(new Member("teamB"));
+        em.persist(new Member("teamC"));
 
+        //when
+        List<Member> result = queryFactory
+                .select(member)
+                .from(member, team) // cross join 됨
+                .where(member.username.eq(team.name))
+                .fetch();
+    }
+
+    /**
+     * 회원과 팀을 join하면서, 팀 이름이 teamA인 팀만 join
+     * 회원은 모두 조회
+     */
+    @Test
+    public void joi_on_filtering() throws Exception {
+        //given
+
+        //when
+        List<Tuple> result = queryFactory
+                .select(member, team)
+                .from(member)
+                .leftJoin(member.team, team)
+                .on(team.name.eq("teamA"))
+                .fetch();
+
+        //then
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+
+    /**
+     * 연관 관계가 없는 엔티티 외부 조인
+     * 회원의 이름이 팀 이름과 같은 대상 외부 조인
+     */
+    @Test
+    public void joi_on_no_relation() throws Exception {
+        //given
+        em.persist(new Member("teamA"));
+        em.persist(new Member("teamB"));
+        em.persist(new Member("teamC"));
+
+        //when
+        List<Tuple> result = queryFactory
+                .select(member, team)
+                .from(member)
+                .leftJoin(team)
+                .on(member.username.eq(team.name))
+                .fetch();
+
+        //then
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+
+    @PersistenceUnit
+    EntityManagerFactory emf;
+
+    @DisplayName("fetch join - lazy 로딩 객체 확인")
+    @Test
+    public void fetch_join() throws Exception {
+        //given
+        em.flush();//fetch join 테스트 시에는 영속성 컨텍스트 정리하는게 좋음
+        em.clear();
+
+        //when
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1"))
+                .fetchOne();
+
+        //then
+        assertFalse(emf.getPersistenceUnitUtil().isLoaded(findMember.getTeam()));
+    }
+
+    @DisplayName("fetch join - 로딩 확인")
+    @Test
+    public void fetch_join_use() throws Exception {
+        //given
+        em.flush();//fetch join 테스트 시에는 영속성 컨텍스트 정리하는게 좋음
+        em.clear();
+
+        //when
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .join(member.team, team).fetchJoin()
+                .where(member.username.eq("member1"))
+                .fetchOne();
+
+        //then
+        assertTrue(emf.getPersistenceUnitUtil().isLoaded(findMember.getTeam()));
+    }
 }
