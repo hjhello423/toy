@@ -520,4 +520,34 @@ public class BasicTest {
             System.out.println("s = " + s);
         }
     }
+
+    @DisplayName("projection 대상이 1개")
+    @Test
+    public void projection() throws Exception {
+        //when
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                .fetch();
+        //then
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    @DisplayName("projection 대상이 여러개")
+    @Test
+    public void projection_tuple() throws Exception {
+        //when
+        List<Tuple> result = queryFactory
+                .select(member.username, member.age)
+                .from(member)
+                .fetch();
+        //then
+        for (Tuple tuple : result) {
+            String userName = tuple.get(member.username);
+            Integer age = tuple.get(member.age);
+            System.out.println(userName + " = " + age);
+        }
+    }
 }
