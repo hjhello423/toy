@@ -6,6 +6,7 @@ import com.github.hjdeepsleep.toy.domain.Team;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.assertj.core.api.Assertions;
@@ -476,6 +477,41 @@ public class BasicTest {
                         .when(member.age.between(0, 20)).then("0~10살")
                         .when(member.age.between(21, 30)).then("21~30살")
                         .otherwise("기타"))
+                .from(member)
+                .fetch();
+
+        //then
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    @DisplayName("상수")
+    @Test
+    public void constant() throws Exception {
+        //when
+        List<Tuple> result = queryFactory
+                .select(member.username, Expressions.constant("A"))
+                .from(member)
+                .fetch();
+
+        //then
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+
+    /**
+     * {userName}_{age}
+     *
+     * @throws Exception
+     */
+    @DisplayName("문자 더하기")
+    @Test
+    public void concat() throws Exception {
+        //when
+        List<String> result = queryFactory
+                .select(member.username.concat("_").concat(member.age.stringValue())) //타입을 String으로맞춰줘야함, enum에도 자주 사용
                 .from(member)
                 .fetch();
 
