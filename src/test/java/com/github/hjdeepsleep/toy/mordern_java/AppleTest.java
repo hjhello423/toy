@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.lambda_study;
+package com.github.hjdeepsleep.toy.mordern_java;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

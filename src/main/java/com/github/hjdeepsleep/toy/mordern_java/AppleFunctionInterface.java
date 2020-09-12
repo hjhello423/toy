@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.lambda_study;
+package com.github.hjdeepsleep.toy.mordern_java;
 
 @FunctionalInterface
 public interface AppleFunctionInterface {
