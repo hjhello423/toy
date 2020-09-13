@@ -1,14 +1,19 @@
 package com.github.hjdeepsleep.toy.domain.mamber.dto;
 
-import lombok.AllArgsConstructor;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class MemberDto {
 
     private String username;
     private int age;
+
+    @QueryProjection //QMemberDto 생성
+    public MemberDto(String username, int age) {
+        this.username = username;
+        this.age = age;
+    }
 }

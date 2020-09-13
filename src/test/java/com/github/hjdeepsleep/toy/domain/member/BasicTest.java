@@ -1,9 +1,10 @@
 package com.github.hjdeepsleep.toy.domain.member;
 
-import com.github.hjdeepsleep.toy.domain.QMember;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
+import com.github.hjdeepsleep.toy.domain.mamber.QMember;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberDto;
+import com.github.hjdeepsleep.toy.domain.mamber.dto.QMemberDto;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.UserDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
@@ -26,8 +27,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import java.util.List;
 
-import static com.github.hjdeepsleep.toy.domain.QMember.member;
-import static com.github.hjdeepsleep.toy.domain.QTeam.team;
+import static com.github.hjdeepsleep.toy.domain.mamber.QMember.member;
+import static com.github.hjdeepsleep.toy.domain.mamber.QTeam.team;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -655,6 +656,20 @@ public class BasicTest {
 
         //then
         for (UserDto dto : result) {
+            System.out.println("dto = " + dto);
+        }
+    }
+
+    @DisplayName("@QueryProjection")
+    @Test
+    public void queryProjection_annotation() throws Exception {
+        //given
+        List<MemberDto> result = queryFactory
+                .select(new QMemberDto(member.username, member.age))
+                .from(member)
+                .fetch();
+        //then
+        for (MemberDto dto : result) {
             System.out.println("dto = " + dto);
         }
     }
