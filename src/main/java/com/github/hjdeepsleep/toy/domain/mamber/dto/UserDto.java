@@ -7,8 +7,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberDto {
+public class UserDto {
 
-    private String username;
+    private String name;
     private int age;
 }
