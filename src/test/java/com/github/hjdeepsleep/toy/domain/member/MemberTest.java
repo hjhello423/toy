@@ -1,17 +1,15 @@
-package com.github.hjdeepsleep.toy.domain;
+package com.github.hjdeepsleep.toy.domain.member;
 
-import com.fasterxml.jackson.databind.deser.std.StdKeyDeserializer;
+import com.github.hjdeepsleep.toy.domain.mamber.Member;
+import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

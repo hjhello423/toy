@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.domain;
+package com.github.hjdeepsleep.toy.domain.mamber;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,6 @@
-package com.github.hjdeepsleep.toy.domain;
+package com.github.hjdeepsleep.toy.domain.mamber;
 
+import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import lombok.*;
 
 import javax.persistence.Entity;

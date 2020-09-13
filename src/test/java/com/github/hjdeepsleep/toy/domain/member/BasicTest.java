@@ -1,8 +1,8 @@
-package com.github.hjdeepsleep.toy;
+package com.github.hjdeepsleep.toy.domain.member;
 
-import com.github.hjdeepsleep.toy.domain.Member;
+import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.QMember;
-import com.github.hjdeepsleep.toy.domain.Team;
+import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.CaseBuilder;
