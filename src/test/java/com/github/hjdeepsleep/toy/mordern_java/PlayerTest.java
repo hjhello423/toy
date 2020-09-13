@@ -6,11 +6,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.github.hjdeepsleep.toy.mordern_java.Type.*;
 import static java.util.stream.Collectors.toList;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlayerTest {
 
@@ -21,10 +26,10 @@ class PlayerTest {
         players = new ArrayList<>();
 
         players.add(new Player("a", true, 10, SOCCER));
-        players.add(new Player("b", false, 20, BASEBALL));
-        players.add(new Player("c", true, 30, SOCCER));
-        players.add(new Player("d", false, 40, BASEBALL));
-        players.add(new Player("e", true, 50, BASKETBALL));
+        players.add(new Player("b", false, 40, BASEBALL));
+        players.add(new Player("c", true, 20, SOCCER));
+        players.add(new Player("d", false, 50, BASEBALL));
+        players.add(new Player("e", true, 30, BASKETBALL));
     }
 
     @Test
@@ -57,5 +62,77 @@ class PlayerTest {
                 () -> {
                     stream.forEach(System.out::println);
                 });
+    }
+
+    @DisplayName("요소 건너 뛰기")
+    @Test
+    public void skip() throws Exception {
+        List<String> collect = players.stream()
+                .map(Player::getName)
+                .skip(2)
+                .collect(toList());
+
+        assertFalse(collect.contains("a"));
+        assertFalse(collect.contains("b"));
+    }
+
+    @DisplayName("매핑")
+    @Test
+    public void map() throws Exception {
+        List<String> words = Arrays.asList("hi", "hello", "apple", "lion");
+
+        List<Integer> collect = words.stream()
+                .map(String::length)
+                .collect(toList());
+    }
+
+    @DisplayName("스트림 평면화")
+    @Test
+    public void flatMap() throws Exception {
+        List<String> words = Arrays.asList("hello", "world");
+
+        List<String[]> collect = words.stream()
+                .map(word -> word.split(""))
+                .distinct()
+                .collect(toList());
+
+        List<String> collect2 = words.stream()
+                .map(word -> word.split(""))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .collect(toList());
+    }
+
+    @DisplayName("리듀스")
+    @Test
+    public void reduce() throws Exception {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        //when
+        Integer result1 = numbers.stream()
+                .reduce(0, (a, b) -> a + b); //초기값 0으로 지정
+
+        Integer result2 = numbers.stream()
+                .reduce(0, Integer::sum);
+
+        //then
+        assertTrue(result1 == 15);
+        assertTrue(result2 == 15);
+    }
+
+    @DisplayName("리듀스 - 초기 값이 없을때")
+    @Test
+    public void reduce_optional() throws Exception {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        //when
+
+        Optional<Integer> result = numbers.stream()
+                .reduce( Integer::sum); //초기값 지정 안할 경우 Optional 반환
+
+        //then
+        assertTrue(result.get() == 15);
     }
 }
