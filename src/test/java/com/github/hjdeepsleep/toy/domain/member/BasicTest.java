@@ -6,6 +6,7 @@ import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberDto;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.QMemberDto;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.UserDto;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
@@ -672,5 +673,36 @@ public class BasicTest {
         for (MemberDto dto : result) {
             System.out.println("dto = " + dto);
         }
+    }
+
+    @DisplayName("동적 쿼리 - BooleanBuilder")
+    @Test
+    public void dynamicQuery_booleanBuilder() throws Exception {
+        //given
+        String usernameParam = "member1";
+        Integer ageParam = null;
+
+        //when
+        List<Member> result = searchMember1(usernameParam, ageParam);
+
+        //then
+        Assertions.assertThat(result.size()).isEqualTo(1);
+    }
+
+    private List<Member> searchMember1(String usernameParam, Integer ageParam) {
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        if (usernameParam != null) {
+            builder.and(member.username.eq(usernameParam));
+        }
+
+        if (ageParam != null) {
+            builder.and(member.age.eq(ageParam));
+        }
+        return queryFactory
+                .selectFrom(member)
+                .where(builder)
+                .fetch();
     }
 }
