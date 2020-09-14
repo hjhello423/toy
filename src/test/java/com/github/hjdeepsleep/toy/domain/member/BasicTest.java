@@ -574,7 +574,7 @@ public class BasicTest {
     public void querydsl_setter() throws Exception {
         //given
         List<MemberDto> result = queryFactory
-                .select(Projections.bean(MemberDto.class,
+                .select(Projections.bean(MemberDto.class, //MemberDto에 setter()가 선언되어 있어야 동작 한다.
                         member.username,
                         member.age))
                 .from(member)

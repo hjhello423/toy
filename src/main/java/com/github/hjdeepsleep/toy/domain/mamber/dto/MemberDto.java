@@ -2,9 +2,11 @@ package com.github.hjdeepsleep.toy.domain.mamber.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString
+@Setter
 @NoArgsConstructor
 public class MemberDto {
 
