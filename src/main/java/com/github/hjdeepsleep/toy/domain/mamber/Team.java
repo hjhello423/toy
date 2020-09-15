@@ -1,6 +1,5 @@
 package com.github.hjdeepsleep.toy.domain.mamber;
 
-import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -15,17 +14,24 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = PROTECTED)
-@ToString(of = {"id", "name"})
+@ToString(of = {"id", "name", "rank", "members"})
 public class Team {
 
     @Id @GeneratedValue
     private Long id;
     private String name;
+    private Integer rank;
 
+    @Getter
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<>();
 
     public Team(String name) {
         this.name = name;
+    }
+
+    public Team(String name, Integer rank) {
+        this(name);
+        this.rank = rank;
     }
 }
