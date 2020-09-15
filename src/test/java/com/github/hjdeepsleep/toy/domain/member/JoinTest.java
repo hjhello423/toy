@@ -229,7 +229,7 @@ public class JoinTest {
         String sql = "select team.*, member.* " +
                 "from team " +
                 "left join member " +
-                "on(team.id = member.member_id and member.age >= 20) " +
+                "on(team.id = member.team_id and member.age >= 20) " +
                 "where team.rank <= 2 ";
         Query nativeQuery = em.createNativeQuery(sql, Team.class);
 
