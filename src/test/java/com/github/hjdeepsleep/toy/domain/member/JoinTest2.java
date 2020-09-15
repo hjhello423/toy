@@ -4,6 +4,7 @@ import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.QMember;
 import com.github.hjdeepsleep.toy.domain.mamber.QTeam;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jdk.nashorn.internal.runtime.arrays.IteratorAction;
 import org.junit.jupiter.api.BeforeEach;
@@ -84,8 +85,7 @@ public class JoinTest2 {
         member members1_
             on team0_.id=members1_.team_id
      where
-        team0_.rank<=2
-        and members1_.age=10
+        team0_.rank<=2 and members1_.age=10
      */
     @Test
     public void test1() throws Exception {
@@ -140,8 +140,7 @@ public class JoinTest2 {
         member members1_
             on team0_.id=members1_.team_id
     where
-        team0_.rank<=2
-        and members1_.age=10
+        team0_.rank<=2 and members1_.age=10
     */
     @Test
     public void test2() throws Exception {
@@ -172,20 +171,56 @@ public class JoinTest2 {
          */
     }
 
+    /**
+     * projection 이용 - team, member
+     *
+     jpql/sql
+     select team, member1
+     from Team team
+     inner join team.members as member1
+     where team.rank <= 2 and member1.age = 10
+
+    select
+        team0_.id as id1_2_0_,
+        members1_.member_id as member_i1_1_1_,
+        team0_.name as name2_2_0_,
+        team0_.rank as rank3_2_0_,
+        members1_.age as age2_1_1_,
+        members1_.team_id as team_id4_1_1_,
+        members1_.username as username3_1_1_
+    from
+        team team0_
+    inner join
+        member members1_
+            on team0_.id=members1_.team_id
+    where
+        team0_.rank<=? and members1_.age=?
+     */
     @Test
     public void test3() throws Exception {
-        //when
-        List<Team> result = queryFactory
-                .select(team)
+        ///when
+        List<Tuple> result = queryFactory
+                .select(team, member)
                 .from(team)
+                .join(team.members, member)
+                .where(team.rank.loe(2))
+                .where(member.age.eq(10))
                 .fetch();
 
-        for (Team team: result){
-            System.out.println(team);
+        for (Tuple tuple: result){
+            System.out.println(tuple);
         }
+        /**
+         결과
 
-        System.out.println("-----");
-        System.out.println(result.get(0).getMembers().get(0).getUsername());
-        System.out.println("-----");
+         application -> age가 10인 member 포함, team에는 여전히 age!=10인 데이터 존
+         [Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)]), Member(id=5, username=member1-1, age=10)]
+         [Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)]), Member(id=8, username=member2-1, age=10)]
+
+         db -> team, member 같이 조회
+         ID1_2_0_  	MEMBER_I1_1_1_  	NAME2_2_0_  	RANK3_2_0_  	AGE2_1_1_  	TEAM_ID4_1_1_  	USERNAME3_1_1_  	TEAM_ID4_1_0__  	MEMBER_I1_1_0__
+         1	            5	            team	        1	            10	            1	        member1-1	        1               	5
+         2	            8	            team2	        2	            10	            2	        member2-1	        2	                8
+         */
     }
 }
