@@ -187,9 +187,6 @@ public class JoinTest {
         System.out.println(result.get(0));
         System.out.println(result.get(0).get(member));
         System.out.println(result.get(0).get(0, Member.class));
-        System.out.println(result.get(0).get(1, Member.class));
-        System.out.println(result.get(0).get(2, Member.class));
-        System.out.println(result.get(0).get(3, Member.class));
         System.out.println("======");
         System.out.println();
 
@@ -233,7 +230,7 @@ public class JoinTest {
                 "from team " +
                 "left join member " +
                 "on(team.id = member.member_id and member.age >= 20) " +
-                "where team.rank >= 2 ";
+                "where team.rank <= 2 ";
         Query nativeQuery = em.createNativeQuery(sql, Team.class);
 
         //when
