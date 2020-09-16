@@ -324,7 +324,7 @@ public class JoinTest2 {
             System.out.println(team);
         }
         /**
-         result 결과
+         result 결과 -> test3()과 같은 쿼리 이지만 결과가 다름
          Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)])
          Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)])
 
@@ -376,7 +376,7 @@ public class JoinTest2 {
         }
         /**
          결과
-         team.members 사용할때마다 select 쿼리 실행(test0과 같은 상황)
+         team.members 사용할때마다 select member 쿼리 실행(test0과 같은 상황)
 
          application -> age가 10인 member 포함, team에는 여전히 age!=10인 데이터 존재
          [Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)]), Member(id=5, username=member1-1, age=10)]
