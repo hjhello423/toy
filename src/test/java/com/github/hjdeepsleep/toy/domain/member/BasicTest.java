@@ -10,7 +10,6 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
@@ -62,8 +61,8 @@ public class BasicTest {
         em.persist(member3);
         em.persist(member4);
 
-        em.flush();
-        em.clear();
+//        em.flush();
+//        em.clear();
     }
 
     @DisplayName("JPQL로 조회")
@@ -711,6 +710,7 @@ public class BasicTest {
                 .fetch();
     }
 
+    @DisplayName("동적 쿼리 - where절에서")
     @Test
     public void dynamicQuery_whereParam() throws Exception {
         //given
@@ -745,6 +745,59 @@ public class BasicTest {
 
     private BooleanExpression allEq(String usernameParam, Integer ageParam) {
         return usernameEq(usernameParam).and(ageEq(ageParam));
+    }
+
+    @DisplayName("bulk")
+    @Test
+//    @Commit
+    public void bulkUpdate() throws Exception {
+        //member1 = 10 -> 비회원
+        //member2 = 20 -> 비회원
+        //member3 = 30 -> 유지
+        //member4 = 40 -> 유지
+
+        //when
+        long count = queryFactory
+                .update(member)
+                .set(member.username, "비회원")
+                .where(member.age.lt(28))
+                .execute();
+
+        //bulk 연산 실행시 persistence context와 데이터 불일치가 일어난다
+        //bulk 연산은 persistence context를 무시하고 insert 하기 때문이다.
+
+        em.flush(); //bulk연산 이후에는 PC를 초기화 해주는것이 좋다
+        em.clear();
+
+        //then
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .fetch();
+
+        for (Member member : result) {
+            System.out.println("member = " + member);
+        }
+    }
+
+    @DisplayName("bulk 연산 - 더하기, 곱하기")
+    @Test
+    public void bulkAdd() throws Exception {
+        //when
+        long count = queryFactory
+                .update(member)
+                .set(member.age, member.age.add(1))
+//                .set(member.age, member.age.multiply(2))
+                .execute();
+    }
+
+    @DisplayName("bulk 연산 - delete")
+    @Test
+    public void bulkDelete() throws Exception {
+        //when
+        long count = queryFactory
+                .delete(member)
+                .where(member.age.gt(18))
+                .execute();
     }
 
 }
