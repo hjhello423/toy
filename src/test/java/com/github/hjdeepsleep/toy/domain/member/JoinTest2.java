@@ -3,6 +3,7 @@ package com.github.hjdeepsleep.toy.domain.member;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.QTeamDto;
+import com.github.hjdeepsleep.toy.domain.mamber.dto.QTeamDto2;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.TeamDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -96,6 +97,8 @@ public class JoinTest2 {
             System.out.println(team);
         }
         /**
+         * 결과
+         *
          * team.members 사용 할때마다 아래의 쿼리 실행
          select
              members0_.team_id as team_id4_1_0_,
@@ -106,6 +109,10 @@ public class JoinTest2 {
              members0_.username as username3_1_1_
          from member members0_
          where members0_.team_id=?
+
+         Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)])
+         Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)])
+         Team(id=4, name=team4, rank=1, members=[])
          */
     }
 
@@ -276,6 +283,59 @@ public class JoinTest2 {
     }
 
     /**
+     * test3과 동일 하지만 쿼리 실행 이전에 모든 팀을 조회하는 쿼리를 한번 실행 - 캐싱 되도록함
+     *
+     * @throws Exception
+     */
+    @Test
+    public void test4() throws Exception {
+        //when
+        List<Team> query1 = queryFactory
+                .select(team)
+                .from(team)
+                .join(team.members, member)
+                .fetchJoin()
+                .fetch();
+
+        for (Team team : query1) {
+            System.out.println(team);
+        }
+        /** 결과
+         Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)])
+         Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)])
+         Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)])
+         Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)])
+         Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)])
+         Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)])
+         Team(id=3, name=team3, rank=3, members=[Member(id=11, username=member3_1, age=10), Member(id=12, username=member3-2, age=20), Member(id=13, username=member3-3, age=30)])
+         Team(id=3, name=team3, rank=3, members=[Member(id=11, username=member3_1, age=10), Member(id=12, username=member3-2, age=20), Member(id=13, username=member3-3, age=30)])
+         Team(id=3, name=team3, rank=3, members=[Member(id=11, username=member3_1, age=10), Member(id=12, username=member3-2, age=20), Member(id=13, username=member3-3, age=30)])
+        */
+        List<Team> query2 = queryFactory //test3() 과 동일 쿼리
+                .select(team)
+                .from(team)
+                .join(team.members, member)
+                .fetchJoin()
+                .where(team.rank.loe(2))
+                .where(member.age.eq(10)) //fetch join 대상을 where에
+                .fetch();
+
+        for (Team team : query2) {
+            System.out.println(team);
+        }
+        /**
+         result 결과
+         Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)])
+         Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)])
+
+         db -> team, member 같이 조회
+         ID1_2_0_  	MEMBER_I1_1_1_  	NAME2_2_0_  	RANK3_2_0_  	AGE2_1_1_  	TEAM_ID4_1_1_  	USERNAME3_1_1_  	TEAM_ID4_1_0__  	MEMBER_I1_1_0__
+         1	5	team	1	10	1	member1-1	1	5
+         2	8	team2	2	10	2	member2-1	2	8
+         */
+    }
+
+    /**
      * projection 이용 - team, member
      *
      jpql/sql
@@ -301,7 +361,7 @@ public class JoinTest2 {
         team0_.rank<=? and members1_.age=?
      */
     @Test
-    public void test4() throws Exception {
+    public void test5() throws Exception {
         ///when
         List<Tuple> result = queryFactory
                 .select(team, member)
@@ -331,9 +391,30 @@ public class JoinTest2 {
 
     /**
      * 결과를 한번에 dto로 받아보기
+     *
+     jpql/sql
+     select team, member1
+     from Team team
+     left join team.members as member1 with member1.age >= 20
+     where team.rank <= 2
+
+     select
+        team0_.id as id1_2_0_,
+        members1_.member_id as member_i1_1_1_,
+        team0_.name as name2_2_0_,
+        team0_.rank as rank3_2_0_,
+        members1_.age as age2_1_1_,
+        members1_.team_id as team_id4_1_1_,
+        members1_.username as username3_1_1_
+     from  team team0_
+     left outer join member members1_
+        on team0_.id=members1_.team_id
+            and ( members1_.age>=20 )
+     where
+        team0_.rank<=2
      */
     @Test
-    public void test5() throws Exception {
+    public void test6() throws Exception {
         //when
         List<TeamDto> result = queryFactory
                 .select(new QTeamDto(team, member))
@@ -348,13 +429,44 @@ public class JoinTest2 {
         }
         /**
          * 결과
+         * team을 출력하는 과정에서 team.members조회를 위해 select mamber 쿼리가 각각 실행됨
          TeamDto(team=Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)]), member=Member(id=6, username=member1-2, age=20))
          TeamDto(team=Team(id=1, name=team1, rank=1, members=[Member(id=5, username=member1-1, age=10), Member(id=6, username=member1-2, age=20), Member(id=7, username=member1-3, age=30)]), member=Member(id=7, username=member1-3, age=30))
-
          TeamDto(team=Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)]), member=Member(id=9, username=member2-2, age=20))
          TeamDto(team=Team(id=2, name=team2, rank=2, members=[Member(id=8, username=member2-1, age=10), Member(id=9, username=member2-2, age=20), Member(id=10, username=member2-3, age=30)]), member=Member(id=10, username=member2-3, age=30))
-
          TeamDto(team=Team(id=4, name=team4, rank=1, members=[]), member=null)
+
+         DB조회 결과
+         ID1_2_0_  	MEMBER_I1_1_1_  	NAME2_2_0_  	RANK3_2_0_  	AGE2_1_1_  	TEAM_ID4_1_1_  	USERNAME3_1_1_
+         1	        6	                team        	1           	20      	1	            member1-2
+         1	        7               	team	        1           	30          1           	member1-3
+         2	        9               	team2	        2               20      	2           	member2-2
+         2	        10              	team2	        2           	30      	2           	member2-3
+         4      	null	            team4       	1           	null	    null        	null
          */
+
+        System.out.println(result.get(0).getMember());
+        System.out.println(result.get(1).getMember());
+        /**
+         * 결과
+         MMember(id=6, username=member1-2, age=20)
+         Member(id=7, username=member1-3, age=30)
+         */
+    }
+
+    /**
+     * test6()의 결과물인 member를 list로 받을순 없을까?
+     *
+     * 이 테스트 코드는 에러로 인해 주석 처리 해두었습니다.
+     */
+    @Test
+    public void test7() throws Exception {
+//        List<TeamDto> result = queryFactory
+//                .select(new QTeamDto2(team, member))  //에러 발생 -> member를 리스트로 못받음
+//                .from(team)
+//                .leftJoin(team.members, member)
+//                .on(member.age.goe(20))
+//                .where(team.rank.loe(2))
+//                .fetch();
     }
 }

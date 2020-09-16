@@ -6,16 +6,17 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @ToString
-public class TeamDto {
-
+public class TeamDto2 {
     private Team team;
-    private Member member;
+    private List<Member> members;
 
     @QueryProjection
-    public TeamDto(Team team, Member members) {
+    public TeamDto2(Team team, List<Member> members) {
         this.team = team;
-        this.member = members;
+        this.members = members;
     }
 }
