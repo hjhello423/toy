@@ -86,7 +86,8 @@ class MemberJpaRepositoryTest {
         condition.setTeamName("teamB");
 
         //when
-        List<MemberTeamDto> result = memberJpaRepository.searchByBuilder(condition);
+//        List<MemberTeamDto> result = memberJpaRepository.searchByBuilder(condition); //builder이용한 동적 쿼리 생성
+        List<MemberTeamDto> result = memberJpaRepository.search(condition); //where절 이용한ㄴ 동적 쿼리 생성
 
         //then
         assertThat(result).extracting("username").containsExactly("member4");
