@@ -469,4 +469,6 @@ public class JoinTest2 {
 //                .where(team.rank.loe(2))
 //                .fetch();
     }
+
+
 }
