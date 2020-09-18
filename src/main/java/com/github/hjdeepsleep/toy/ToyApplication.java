@@ -14,8 +14,8 @@ public class ToyApplication {
         SpringApplication.run(ToyApplication.class, args);
     }
 
-//    @Bean
-//    public JPAQueryFactory queryFactory(EntityManager em) {
-//		return new JPAQueryFactory(em);
-//    }
+    @Bean
+    public JPAQueryFactory queryFactory(EntityManager em) {
+		return new JPAQueryFactory(em);
+    }
 }
