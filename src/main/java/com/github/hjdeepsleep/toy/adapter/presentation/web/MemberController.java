@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.presentation.web.Controller;
+package com.github.hjdeepsleep.toy.adapter.presentation.web;
 
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberTeamDto;

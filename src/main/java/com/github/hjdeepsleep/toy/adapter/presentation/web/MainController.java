@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.presentation.web.Controller;
+package com.github.hjdeepsleep.toy.adapter.presentation.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
