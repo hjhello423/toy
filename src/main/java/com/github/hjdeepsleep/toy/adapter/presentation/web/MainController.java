@@ -1,14 +1,16 @@
 package com.github.hjdeepsleep.toy.adapter.presentation.web;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class MainController {
 
-    @GetMapping
-    public Object hello() {
-
-        return "hello~";
+    @GetMapping("/hello")
+    public Object hello(Model model) {
+        model.addAttribute("data", "hello!!!");
+        return "hello";
     }
 }

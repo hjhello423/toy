@@ -34,8 +34,9 @@ public class MemberJpaRepository {
 //        this.queryFactory = queryFactory;
 //    }
 
-    public void save(Member member) {
+    public Long save(Member member) {
         em.persist(member);
+        return member.getId();
     }
 
     public Optional<Member> findById(Long id) {
@@ -128,7 +129,7 @@ public class MemberJpaRepository {
         return Objects.isNull(ageGoe) ? null : member.age.goe(ageGoe);
     }
 
-    private BooleanExpression  ageLoe(Integer ageLoe) {
+    private BooleanExpression ageLoe(Integer ageLoe) {
         return Objects.isNull(ageLoe) ? null : member.age.loe(ageLoe);
     }
 }

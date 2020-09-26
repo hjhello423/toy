@@ -5,6 +5,7 @@ import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberTeamDto;
+import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,6 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 @SpringBootTest
 @Transactional
@@ -32,17 +32,18 @@ class MemberJpaRepositoryTest {
         Member member = new Member("member1", 10);
 
         //when
-        memberJpaRepository.save(member);
+        Long saveId = memberJpaRepository.save(member);
+        Member findMember = memberJpaRepository.findById(saveId)
+                .orElseThrow(() -> new NotFoundException("not found user"));
 
         //then
-        Member findMember = memberJpaRepository.findById(member.getId()).get();
         assertThat(findMember).isEqualTo(member);
 
-        List<Member> result1 = memberJpaRepository.findAll();
-        assertThat(result1).containsExactly(member);
+        List<Member> findAll = memberJpaRepository.findAll();
+        assertThat(findAll).containsExactly(member);
 
-        List<Member> result2 = memberJpaRepository.findByUsername("member1");
-        assertThat(result2).containsExactly(member);
+        List<Member> findByName = memberJpaRepository.findByUsername("member1");
+        assertThat(findByName).containsExactly(member);
     }
 
     @Test
