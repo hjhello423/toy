@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.repository.support;
+package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.support;
 
 import com.querydsl.core.types.EntityPath;
 import com.querydsl.core.types.Expression;

@@ -1,8 +1,8 @@
-package com.github.hjdeepsleep.toy.repository;
+package com.github.hjdeepsleep.toy.adapter.infrastructor.repository;
 
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
-import com.github.hjdeepsleep.toy.repository.support.Querydsl4RepositorySupport;
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.support.Querydsl4RepositorySupport;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;

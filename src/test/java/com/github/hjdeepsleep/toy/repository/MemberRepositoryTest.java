@@ -1,5 +1,6 @@
 package com.github.hjdeepsleep.toy.repository;
 
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.MemberRepository;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.QMember;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;

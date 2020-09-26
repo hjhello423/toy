@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.repository;
+package com.github.hjdeepsleep.toy.adapter.infrastructor.repository;
 
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

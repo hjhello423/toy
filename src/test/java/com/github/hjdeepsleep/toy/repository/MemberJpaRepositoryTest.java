@@ -1,5 +1,6 @@
 package com.github.hjdeepsleep.toy.repository;
 
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.MemberJpaRepository;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;

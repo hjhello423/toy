@@ -1,9 +1,9 @@
-package com.github.hjdeepsleep.toy.adapter.web.Controller;
+package com.github.hjdeepsleep.toy.adapter.presentation.web.Controller;
 
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberTeamDto;
-import com.github.hjdeepsleep.toy.repository.MemberJpaRepository;
-import com.github.hjdeepsleep.toy.repository.MemberRepository;
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.MemberJpaRepository;
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

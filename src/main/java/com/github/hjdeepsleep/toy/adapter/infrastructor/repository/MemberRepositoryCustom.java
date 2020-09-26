@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.repository;
+package com.github.hjdeepsleep.toy.adapter.infrastructor.repository;
 
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberTeamDto;
