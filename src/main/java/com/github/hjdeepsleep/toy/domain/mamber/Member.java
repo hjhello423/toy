@@ -16,7 +16,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = PROTECTED)
+@NoArgsConstructor
 @ToString(of = {"id", "username", "age"})
 public class Member {
 
