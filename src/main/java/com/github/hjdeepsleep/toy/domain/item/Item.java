@@ -1,5 +1,6 @@
 package com.github.hjdeepsleep.toy.domain.item;
 
+import com.github.hjdeepsleep.toy.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,4 +24,20 @@ public class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    /**
+     * 재고 증가
+     * @param stockQuantity
+     */
+    public void addStock(int stockQuantity) {
+        this.stockQuantity += stockQuantity;
+    }
+
+    public void removeStock(int stockQuantity) {
+        int restStock = this.stockQuantity - stockQuantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 }
