@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.item;
+package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.item;
 
 import com.github.hjdeepsleep.toy.domain.item.Item;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ItemRepository {
+public class ItemJpqlRepository {
 
     private final EntityManager em;
 

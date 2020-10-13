@@ -1,6 +1,6 @@
 package com.github.hjdeepsleep.toy.application.item;
 
-import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.item.ItemRepository;
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.item.ItemJpqlRepository;
 import com.github.hjdeepsleep.toy.domain.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,18 +13,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService {
 
-    private final ItemRepository itemRepository;
+    private final ItemJpqlRepository itemJpqlRepository;
 
     @Transactional
     public void saveItem(Item item) {
-        itemRepository.save(item);
+        itemJpqlRepository.save(item);
     }
 
     public List<Item> findItems() {
-        return itemRepository.findAll();
+        return itemJpqlRepository.findAll();
     }
 
     public Item findOne(Long id) {
-        return itemRepository.findOne(id);
+        return itemJpqlRepository.findOne(id);
     }
 }

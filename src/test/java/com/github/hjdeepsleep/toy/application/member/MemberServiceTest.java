@@ -1,6 +1,6 @@
 package com.github.hjdeepsleep.toy.application.member;
 
-import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.MemberJpqlRepository;
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.member.MemberJpqlRepository;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

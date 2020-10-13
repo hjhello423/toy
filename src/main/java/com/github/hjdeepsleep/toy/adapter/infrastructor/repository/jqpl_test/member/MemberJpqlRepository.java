@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test;
+package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.member;
 
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import org.springframework.stereotype.Repository;
