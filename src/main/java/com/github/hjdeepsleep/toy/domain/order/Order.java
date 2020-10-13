@@ -1,8 +1,10 @@
 package com.github.hjdeepsleep.toy.domain.order;
 
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
+import com.github.hjdeepsleep.toy.enums.DeliveryStatus;
 import com.github.hjdeepsleep.toy.enums.OrderStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,10 +14,12 @@ import java.util.List;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
+import static lombok.AccessLevel.PROTECTED;
 
 @Getter @Setter
 @Entity
 @Table(name = "orders")
+@NoArgsConstructor(access = PROTECTED)
 public class Order {
 
     @Id @GeneratedValue
@@ -49,5 +53,50 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    /**
+     * 주문 생성
+     *
+     * @param member
+     * @param delivery
+     * @param orderItems
+     * @return
+     */
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for (OrderItem item : orderItems) {
+            order.addOrderItem(item);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    /**
+     * 주문 취소
+     */
+    public void cancel() {
+        if (delivery.getStatus() == DeliveryStatus.COMP) {
+            throw new IllegalStateException("이미 배송 완료됨");
+        }
+
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItem item : orderItems) {
+            item.cancel();
+        }
+    }
+
+    /**
+     * 총 주문 금액 조회
+     *
+     * @return
+     */
+    public int getTotalPrice() {
+         return orderItems.stream()
+                .mapToInt(OrderItem::getTotalPrice)
+                .sum();
     }
 }
