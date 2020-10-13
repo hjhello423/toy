@@ -3,6 +3,7 @@ package com.github.hjdeepsleep.toy.application.member;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.MemberJpqlRepository;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,7 @@ class MemberServiceTest {
     @Autowired
     MemberJpqlRepository memberJpqlRepository;
 
+    @DisplayName("회원가입")
     @Test
     @Rollback(value = false)
     public void join() throws Exception {
@@ -34,6 +36,7 @@ class MemberServiceTest {
         Assertions.assertEquals(member, memberJpqlRepository.findOne(savedId));
     }
 
+    @DisplayName("회원 중복 검사")
     @Test
     public void validate_duplicate() throws Exception {
         //given
