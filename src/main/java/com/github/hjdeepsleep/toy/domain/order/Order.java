@@ -33,10 +33,10 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //cascade는 관계가 최대한 적은 애들만 사용하는 것이 좋다.
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -80,7 +80,7 @@ public class Order {
      */
     public void cancel() {
         if (delivery.getStatus() == DeliveryStatus.COMP) {
-            throw new IllegalStateException("이미 배송 완료됨");
+            throw new IllegalStateException("이미 배송 완료됨(취소 불가)");
         }
 
         this.setStatus(OrderStatus.CANCEL);

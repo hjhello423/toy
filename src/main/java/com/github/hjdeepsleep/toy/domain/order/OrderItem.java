@@ -2,14 +2,17 @@ package com.github.hjdeepsleep.toy.domain.order;
 
 import com.github.hjdeepsleep.toy.domain.item.Item;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
+import static lombok.AccessLevel.PROTECTED;
 
 @Getter @Setter
 @Entity
+@NoArgsConstructor(access = PROTECTED)
 public class OrderItem {
 
     @Id
