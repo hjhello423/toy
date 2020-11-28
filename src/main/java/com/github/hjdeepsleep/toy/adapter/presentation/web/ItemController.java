@@ -3,11 +3,14 @@ package com.github.hjdeepsleep.toy.adapter.presentation.web;
 import com.github.hjdeepsleep.toy.adapter.presentation.web.dto.BookForm;
 import com.github.hjdeepsleep.toy.application.item.ItemService;
 import com.github.hjdeepsleep.toy.domain.item.Book;
+import com.github.hjdeepsleep.toy.domain.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,6 +35,13 @@ public class ItemController {
 
         itemService.saveItem(book);
         return "redirect:/items";
+    }
+
+    @GetMapping("/items")
+    public String list(Model model) {
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items", items);
+        return "items/itemList";
     }
 
 }
