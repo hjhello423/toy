@@ -3,6 +3,7 @@ package com.github.hjdeepsleep.toy.application.order;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.item.ItemJpqlRepository;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.member.MemberJpqlRepository;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderJpqlRepository;
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderSearch;
 import com.github.hjdeepsleep.toy.domain.item.Item;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.order.Delivery;
@@ -11,6 +12,8 @@ import com.github.hjdeepsleep.toy.domain.order.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -56,5 +59,10 @@ public class OrderService {
 
         //주문 취소
         order.cancel();
+    }
+
+    //검색
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderJpqlRepository.findAll(orderSearch);
     }
 }
