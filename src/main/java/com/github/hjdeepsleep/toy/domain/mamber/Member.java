@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
+    @NotEmpty
     private String username;
     private int age;
     @Embedded
