@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.presentation.web;
+package com.github.hjdeepsleep.toy.adapter.presentation.web.view;
 
 import com.github.hjdeepsleep.toy.adapter.presentation.web.dto.BookForm;
 import com.github.hjdeepsleep.toy.application.item.ItemService;

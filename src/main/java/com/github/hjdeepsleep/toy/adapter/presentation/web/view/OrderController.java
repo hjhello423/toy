@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.presentation.web;
+package com.github.hjdeepsleep.toy.adapter.presentation.web.view;
 
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderSearch;
 import com.github.hjdeepsleep.toy.application.item.ItemService;

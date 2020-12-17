@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.presentation.web;
+package com.github.hjdeepsleep.toy.adapter.presentation.web.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
