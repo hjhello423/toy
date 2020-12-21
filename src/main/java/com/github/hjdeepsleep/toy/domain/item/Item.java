@@ -1,7 +1,6 @@
 package com.github.hjdeepsleep.toy.domain.item;
 
 import com.github.hjdeepsleep.toy.exception.NotEnoughStockException;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

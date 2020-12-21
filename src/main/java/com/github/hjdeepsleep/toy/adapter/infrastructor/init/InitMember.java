@@ -1,7 +1,13 @@
 package com.github.hjdeepsleep.toy.adapter.infrastructor.init;
 
+import com.github.hjdeepsleep.toy.domain.item.Book;
+import com.github.hjdeepsleep.toy.domain.item.Item;
+import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;
+import com.github.hjdeepsleep.toy.domain.order.Delivery;
+import com.github.hjdeepsleep.toy.domain.order.Order;
+import com.github.hjdeepsleep.toy.domain.order.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -21,25 +27,71 @@ public class InitMember {
     @PostConstruct
     public void init() {
         initMemberService.init();
+        initMemberService.init2();
     }
 
+    @Transactional
     @Component
     static class InitMemberService {
 
         @PersistenceContext
         private EntityManager em;
 
-        @Transactional
         public void init() {
-            Team teamA = new Team("teamA");
-            Team teamB = new Team("teamB");
-            em.persist(teamA);
-            em.persist(teamB);
+            Team team = new Team("teamA");
+            em.persist(team);
 
-            for (int i = 0; i < 100; i++) {
-                Team selectedTeam = i % 2 == 0 ? teamA : teamB;
-                em.persist(new Member("member" + i, i, selectedTeam));
-            }
+            Member member = createMember(team, 10, "memberA", "경기", "10번길", "1010");
+            em.persist(member);
+
+            Item item1 = createItem("JPA", 1000, 10);
+            Item item2 = createItem("Spring", 2000, 15);
+            em.persist(item1);
+            em.persist(item2);
+
+            OrderItem orderItem1 = OrderItem.createOrderItem(item1, 1000, 1);
+            OrderItem orderItem2 = OrderItem.createOrderItem(item2, 4000, 2);
+
+            Delivery delivery = createDelivery(member);
+            Order order = Order.createOrder(member, delivery, orderItem1, orderItem2);
+            em.persist(order);
+        }
+
+        public void init2() {
+            Team team = new Team("teamB");
+            em.persist(team);
+
+            Member member = createMember(team, 10, "memberB", "경기", "15번길", "1515");
+
+            em.persist(member);
+
+            Item item1 = createItem("DB", 3000, 20);
+            Item item2 = createItem("Java", 4000, 15);
+            em.persist(item1);
+            em.persist(item2);
+
+            OrderItem orderItem1 = OrderItem.createOrderItem(item1, 1000, 1);
+            OrderItem orderItem2 = OrderItem.createOrderItem(item2, 4000, 2);
+
+            Delivery delivery = createDelivery(member);
+            Order order = Order.createOrder(member, delivery, orderItem1, orderItem2);
+            em.persist(order);
+        }
+
+        private Delivery createDelivery(Member member) {
+            Delivery delivery = new Delivery();
+            delivery.setAddress((member.getAddress()));
+            return delivery;
+        }
+
+        private Item createItem(String name, int price, int quantity) {
+            return new Item(name, price, quantity);
+        }
+
+        private Member createMember(Team team, int age, String userName, String city, String street, String zipcode) {
+            Member member = new Member(userName, age, team);
+            member.setAddress(new Address(city, street, zipcode));
+            return member;
         }
     }
 }
