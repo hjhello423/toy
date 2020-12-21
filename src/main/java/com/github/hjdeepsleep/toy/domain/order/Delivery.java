@@ -1,5 +1,6 @@
 package com.github.hjdeepsleep.toy.domain.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.enums.DeliveryStatus;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Delivery {
     @Enumerated(STRING)
     private DeliveryStatus status;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order;
 }
