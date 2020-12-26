@@ -2,13 +2,19 @@ package com.github.hjdeepsleep.toy.adapter.presentation.web.api;
 
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderJpqlRepository;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderSearch;
+import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.order.Order;
 import com.github.hjdeepsleep.toy.domain.order.OrderItem;
+import com.github.hjdeepsleep.toy.enums.OrderStatus;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +32,52 @@ public class OrderApiController {
             orderItems.forEach(o -> o.getItem().getName());
         }
         return all;
+    }
+
+    @GetMapping("/api/v2/orders")
+    public List<OrderDto> ordersV2() {
+        List<Order> orders = orderJpqlRepository.findAll(new OrderSearch());
+        List<OrderDto> collect = orders.stream()
+                .map(OrderDto::new)
+                .collect(toList());
+
+        return collect;
+    }
+
+    @Getter
+    static class OrderDto {
+
+        private Long orderId;
+        private String username;
+        private LocalDateTime orderDate;
+        private OrderStatus orderStatus;
+        private Address address;
+        private List<OrderItemDto> orderItems;
+
+        public OrderDto(Order order) {
+            this.orderId = order.getId();
+            this.username = order.getMember().getUsername();
+            this.orderDate = order.getOrderDate();
+            this.orderStatus = order.getStatus();
+            this.address = order.getDelivery().getAddress();
+            this.orderItems = order.getOrderItems()
+                    .stream()
+                    .map(OrderItemDto::new)
+                    .collect(toList());
+        }
+    }
+
+    @Getter
+    static class OrderItemDto {
+
+        private String itemName;
+        private int orderPrice;
+        private int count;
+
+        public OrderItemDto(OrderItem orderItem) {
+            this.itemName = orderItem.getItem().getName();
+            this.orderPrice = orderItem.getOrderPrice();
+            this.count = orderItem.getCount();
+        }
     }
 }
