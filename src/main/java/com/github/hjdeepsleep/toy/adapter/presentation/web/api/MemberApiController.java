@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController("memberApiController")
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberApiController {
 
     private final MemberJpaRepository memberJpaRepository;
     private final MemberRepository memberRepository;
