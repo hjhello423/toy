@@ -1,5 +1,6 @@
 package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.query;
 
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderFlatDto;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderItemQueryDto;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderQueryDto;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderSimpleQueryDto;
@@ -43,6 +44,18 @@ public class OrderQueryRepository {
 
         result.forEach(o -> o.setOrderItems(orderItemMap.get(o.getOrderId())));
         return result;
+    }
+
+    public List<OrderFlatDto> findOrderQueryDots3() {
+        return em.createQuery(
+                "select new " +
+                        " com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderFlatDto(o.id, m.username, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+                        " from Order o" +
+                        " join o.member m" +
+                        " join o.delivery d" +
+                        " join o.orderItems oi" +
+                        " join oi.item i ", OrderFlatDto.class)
+                .getResultList();
     }
 
     private Map<Long, List<OrderItemQueryDto>> findOrderitemMap(List<Long> orderIds) {

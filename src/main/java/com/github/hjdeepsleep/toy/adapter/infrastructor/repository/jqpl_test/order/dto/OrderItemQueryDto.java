@@ -1,6 +1,5 @@
 package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
