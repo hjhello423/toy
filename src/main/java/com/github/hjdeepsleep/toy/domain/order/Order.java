@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,13 +19,15 @@ import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @ToString
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor(access = PROTECTED)
 public class Order {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "order_id")
     private Long id;
     private LocalDateTime orderDate;
@@ -35,6 +38,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @BatchSize(size = 1000)
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //cascade는 관계가 최대한 적은 애들만 사용하는 것이 좋다.
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -97,7 +101,7 @@ public class Order {
      * @return
      */
     public int getTotalPrice() {
-         return orderItems.stream()
+        return orderItems.stream()
                 .mapToInt(OrderItem::getTotalPrice)
                 .sum();
     }
