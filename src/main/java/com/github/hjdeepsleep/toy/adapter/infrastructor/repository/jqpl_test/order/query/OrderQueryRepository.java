@@ -54,7 +54,7 @@ public class OrderQueryRepository {
                 .getResultList();
 
         Map<Long, List<OrderItemQueryDto>> orderItemMap = orderItems.stream()
-            리    .collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
+                .collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
         return orderItemMap;
     }
 
