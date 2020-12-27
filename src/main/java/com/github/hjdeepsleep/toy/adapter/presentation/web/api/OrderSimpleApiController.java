@@ -3,7 +3,7 @@ package com.github.hjdeepsleep.toy.adapter.presentation.web.api;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderJpqlRepository;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderSearch;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderSimpleQueryDto;
-import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.view.OrderQueryRepository;
+import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.query.OrderQueryRepository;
 import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.order.Order;
 import com.github.hjdeepsleep.toy.enums.OrderStatus;

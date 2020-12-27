@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.view;
+package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.query;
 
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
