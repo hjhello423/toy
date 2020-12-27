@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -32,6 +34,35 @@ public class OrderQueryRepository {
         });
 
         return result;
+    }
+
+    public List<OrderQueryDto> findOrderQueryDots2() {
+        List<OrderQueryDto> result = findOrders();
+
+        Map<Long, List<OrderItemQueryDto>> orderItemMap = findOrderitemMap(toOrderIds(result));
+
+        result.forEach(o -> o.setOrderItems(orderItemMap.get(o.getOrderId())));
+        return result;
+    }
+
+    private Map<Long, List<OrderItemQueryDto>> findOrderitemMap(List<Long> orderIds) {
+        List<OrderItemQueryDto> orderItems = em.createQuery("select new com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderItemQueryDto(oi.order.id, i.name, oi.orderPrice, oi.count)" +
+                " from OrderItem oi" +
+                " join oi.item i" +
+                " where oi.order.id in :orderIds", OrderItemQueryDto.class)
+                .setParameter("orderIds", orderIds)
+                .getResultList();
+
+        Map<Long, List<OrderItemQueryDto>> orderItemMap = orderItems.stream()
+            리    .collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
+        return orderItemMap;
+    }
+
+    private List<Long> toOrderIds(List<OrderQueryDto> result) {
+        List<Long> orderIds = result.stream()
+                .map(OrderQueryDto::getOrderId)
+                .collect(Collectors.toList());
+        return orderIds;
     }
 
     private List<OrderItemQueryDto> findOrderItems(Long orderId) {
