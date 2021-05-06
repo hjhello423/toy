@@ -1,26 +1,34 @@
 package com.github.hjdeepsleep.toy.domain.mamber;
 
+import static javax.persistence.FetchType.LAZY;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.hjdeepsleep.toy.domain.order.Order;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
-
-import static javax.persistence.FetchType.LAZY;
-
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(of = {"id", "username", "age"})
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "member_id")
     private Long id;
     @NotEmpty
@@ -58,4 +66,5 @@ public class Member {
         this.team = team;
         team.getMembers().add(this);
     }
+
 }

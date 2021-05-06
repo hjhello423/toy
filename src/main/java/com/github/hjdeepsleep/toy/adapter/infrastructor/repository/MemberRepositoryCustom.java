@@ -2,10 +2,9 @@ package com.github.hjdeepsleep.toy.adapter.infrastructor.repository;
 
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberTeamDto;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 public interface MemberRepositoryCustom {
 
@@ -16,4 +15,5 @@ public interface MemberRepositoryCustom {
     Page<MemberTeamDto> searchPageComplex(MemberSearchCondition condition, Pageable pageable);
 
     Page<MemberTeamDto> searchPageComplexAdvanced(MemberSearchCondition condition, Pageable pageable);
+
 }

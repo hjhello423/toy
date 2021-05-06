@@ -7,12 +7,15 @@ import com.github.hjdeepsleep.toy.application.order.OrderService;
 import com.github.hjdeepsleep.toy.domain.item.Item;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.order.Order;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,8 +39,8 @@ public class OrderController {
 
     @PostMapping("/order")
     public String order(@RequestParam("memberId") Long memberId,
-                        @RequestParam("itemId") Long itemId,
-                        @RequestParam("count") int count) {
+        @RequestParam("itemId") Long itemId,
+        @RequestParam("count") int count) {
 
         orderService.order(memberId, itemId, count);
         return "redirect:/orders";
@@ -56,4 +59,5 @@ public class OrderController {
         orderService.cancelOrder(orderId);
         return "redirect:/orders";
     }
+
 }

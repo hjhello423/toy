@@ -18,4 +18,5 @@ public class MemberDto {
         this.username = username;
         this.age = age;
     }
+
 }

@@ -2,11 +2,10 @@ package com.github.hjdeepsleep.toy;
 
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import javax.persistence.EntityManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import javax.persistence.EntityManager;
 
 @SpringBootApplication
 public class ToyApplication {

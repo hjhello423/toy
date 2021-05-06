@@ -1,5 +1,9 @@
 package com.github.hjdeepsleep.toy.adapter.presentation.web.api;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
+
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderJpqlRepository;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.OrderSearch;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderFlatDto;
@@ -10,18 +14,13 @@ import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.order.Order;
 import com.github.hjdeepsleep.toy.domain.order.OrderItem;
 import com.github.hjdeepsleep.toy.enums.OrderStatus;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static java.util.stream.Collectors.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,8 +45,8 @@ public class OrderApiController {
     public List<OrderDto> ordersV2() {
         List<Order> orders = orderJpqlRepository.findAll(new OrderSearch());
         List<OrderDto> collect = orders.stream()
-                .map(OrderDto::new)
-                .collect(toList());
+            .map(OrderDto::new)
+            .collect(toList());
 
         return collect;
     }
@@ -56,20 +55,20 @@ public class OrderApiController {
     public List<OrderDto> ordersV3() {
         List<Order> orders = orderJpqlRepository.findAllWithItem();
         List<OrderDto> collect = orders.stream()
-                .map(OrderDto::new)
-                .collect(toList());
+            .map(OrderDto::new)
+            .collect(toList());
 
         return collect;
     }
 
     @GetMapping("/api/v3.1/orders")
     public List<OrderDto> ordersPageV3(
-            @RequestParam(value = "offset", defaultValue = "0") int offset,
-            @RequestParam(value = "limit", defaultValue = "100") int limit) {
+        @RequestParam(value = "offset", defaultValue = "0") int offset,
+        @RequestParam(value = "limit", defaultValue = "100") int limit) {
         List<Order> orders = orderJpqlRepository.findAllWithMemberDelivery(offset, limit);
         List<OrderDto> collect = orders.stream()
-                .map(OrderDto::new)
-                .collect(toList());
+            .map(OrderDto::new)
+            .collect(toList());
 
         return collect;
     }
@@ -89,11 +88,15 @@ public class OrderApiController {
         List<OrderFlatDto> flats = orderQueryRepository.findOrderQueryDots3();
 
         return flats.stream()
-                .collect(groupingBy(o -> new OrderQueryDto(o.getOrderId(), o.getUserName(), o.getOrderDate(), o.getOrderStatus(), o.getAddress()),
-                        mapping(o -> new OrderItemQueryDto(o.getOrderId(), o.getItemName(), o.getOrderPrice(), o.getCount()), toList())))
-                .entrySet().stream()
-                .map(e -> new OrderQueryDto(e.getKey().getOrderId(), e.getKey().getUserName(), e.getKey().getOrderDate(), e.getKey().getOrderStatus(), e.getKey().getAddress(), e.getValue()))
-                .collect(toList());
+            .collect(groupingBy(
+                o -> new OrderQueryDto(o.getOrderId(), o.getUserName(), o.getOrderDate(), o.getOrderStatus(),
+                    o.getAddress()),
+                mapping(o -> new OrderItemQueryDto(o.getOrderId(), o.getItemName(), o.getOrderPrice(), o.getCount()),
+                    toList())))
+            .entrySet().stream()
+            .map(e -> new OrderQueryDto(e.getKey().getOrderId(), e.getKey().getUserName(), e.getKey().getOrderDate(),
+                e.getKey().getOrderStatus(), e.getKey().getAddress(), e.getValue()))
+            .collect(toList());
     }
 
     @Getter
@@ -113,9 +116,9 @@ public class OrderApiController {
             this.orderStatus = order.getStatus();
             this.address = order.getDelivery().getAddress();
             this.orderItems = order.getOrderItems()
-                    .stream()
-                    .map(OrderItemDto::new)
-                    .collect(toList());
+                .stream()
+                .map(OrderItemDto::new)
+                .collect(toList());
         }
     }
 
@@ -132,4 +135,5 @@ public class OrderApiController {
             this.count = orderItem.getCount();
         }
     }
+
 }

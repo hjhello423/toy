@@ -1,11 +1,10 @@
 package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.item;
 
 import com.github.hjdeepsleep.toy.domain.item.Item;
+import java.util.List;
+import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class ItemJpqlRepository {
 
     public List<Item> findAll() {
         return em.createQuery("select i from Item i", Item.class)
-                .getResultList();
+            .getResultList();
     }
 
 }

@@ -9,11 +9,10 @@ import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.order.Delivery;
 import com.github.hjdeepsleep.toy.domain.order.Order;
 import com.github.hjdeepsleep.toy.domain.order.OrderItem;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -65,4 +64,5 @@ public class OrderService {
     public List<Order> findOrders(OrderSearch orderSearch) {
         return orderJpqlRepository.findAll(orderSearch);
     }
+
 }

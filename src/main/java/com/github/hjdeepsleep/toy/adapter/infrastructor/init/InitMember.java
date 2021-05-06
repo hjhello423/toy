@@ -1,6 +1,5 @@
 package com.github.hjdeepsleep.toy.adapter.infrastructor.init;
 
-import com.github.hjdeepsleep.toy.domain.item.Book;
 import com.github.hjdeepsleep.toy.domain.item.Item;
 import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
@@ -8,14 +7,13 @@ import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.github.hjdeepsleep.toy.domain.order.Delivery;
 import com.github.hjdeepsleep.toy.domain.order.Order;
 import com.github.hjdeepsleep.toy.domain.order.OrderItem;
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 @Profile("local")
 @Component
@@ -94,4 +92,5 @@ public class InitMember {
             return member;
         }
     }
+
 }

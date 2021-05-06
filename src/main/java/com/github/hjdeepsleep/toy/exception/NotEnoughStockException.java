@@ -1,6 +1,7 @@
 package com.github.hjdeepsleep.toy.exception;
 
-public class NotEnoughStockException extends RuntimeException{
+public class NotEnoughStockException extends RuntimeException {
+
     public NotEnoughStockException() {
         super();
     }
@@ -16,4 +17,5 @@ public class NotEnoughStockException extends RuntimeException{
     public NotEnoughStockException(Throwable throwable) {
         super(throwable);
     }
+
 }

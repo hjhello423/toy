@@ -1,26 +1,27 @@
 package com.github.hjdeepsleep.toy.domain.mamber;
 
+import static lombok.AccessLevel.PROTECTED;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
-
-import static lombok.AccessLevel.PROTECTED;
-
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor(access = PROTECTED)
 @ToString(of = {"id", "name", "rank", "members"})
 public class Team {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private Integer rank;
@@ -37,4 +38,5 @@ public class Team {
         this(name);
         this.rank = rank;
     }
+
 }

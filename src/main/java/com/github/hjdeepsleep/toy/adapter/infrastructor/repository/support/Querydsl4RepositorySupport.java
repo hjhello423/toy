@@ -5,6 +5,10 @@ import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import java.util.function.Function;
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +20,6 @@ import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.function.Function;
-
 /**
  * Querydsl 4.x 버전에 맞춘 Querydsl 지원 라이브러리
  *
@@ -29,6 +28,7 @@ import java.util.function.Function;
  */
 @Repository
 public abstract class Querydsl4RepositorySupport {
+
     private final Class domainClass;
     private Querydsl querydsl;
     private EntityManager entityManager;
@@ -43,7 +43,7 @@ public abstract class Querydsl4RepositorySupport {
     public void setEntityManager(EntityManager entityManager) {
         Assert.notNull(entityManager, "EntityManager must not be null!");
         JpaEntityInformation entityInformation =
-                JpaEntityInformationSupport.getEntityInformation(domainClass, entityManager);
+            JpaEntityInformationSupport.getEntityInformation(domainClass, entityManager);
         SimpleEntityPathResolver resolver = SimpleEntityPathResolver.INSTANCE;
         EntityPath path = resolver.createPath(entityInformation.getJavaType());
         this.entityManager = entityManager;
@@ -79,23 +79,24 @@ public abstract class Querydsl4RepositorySupport {
     }
 
     protected <T> Page<T> applyPagination(Pageable pageable,
-                                          Function<JPAQueryFactory, JPAQuery> contentQuery) {
+        Function<JPAQueryFactory, JPAQuery> contentQuery) {
         JPAQuery jpaQuery = contentQuery.apply(getQueryFactory());
         List<T> content = getQuerydsl().applyPagination(pageable, jpaQuery).fetch();
 
         return PageableExecutionUtils.getPage(content, pageable,
-                jpaQuery::fetchCount);
+            jpaQuery::fetchCount);
     }
 
     protected <T> Page<T> applyPagination(Pageable pageable,
-                                          Function<JPAQueryFactory, JPAQuery> contentQuery,
-                                          Function<JPAQueryFactory, JPAQuery> countQuery) {
+        Function<JPAQueryFactory, JPAQuery> contentQuery,
+        Function<JPAQueryFactory, JPAQuery> countQuery) {
 
         JPAQuery jpaContentQuery = contentQuery.apply(getQueryFactory());
         List<T> content = getQuerydsl().applyPagination(pageable, jpaContentQuery).fetch();
         JPAQuery countResult = countQuery.apply(getQueryFactory());
-        
+
         return PageableExecutionUtils.getPage(content, pageable,
-                countResult::fetchCount);
+            countResult::fetchCount);
     }
+
 }

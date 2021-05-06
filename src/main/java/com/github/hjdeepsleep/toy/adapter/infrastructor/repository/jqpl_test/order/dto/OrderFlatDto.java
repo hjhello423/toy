@@ -2,10 +2,9 @@ package com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.or
 
 import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.enums.OrderStatus;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,7 +19,8 @@ public class OrderFlatDto {
     private int orderPrice;
     private int count;
 
-    public OrderFlatDto(Long orderId, String userName, LocalDateTime orderDate, OrderStatus orderStatus, Address address, String itemName, int orderPrice, int count) {
+    public OrderFlatDto(Long orderId, String userName, LocalDateTime orderDate, OrderStatus orderStatus,
+        Address address, String itemName, int orderPrice, int count) {
         this.orderId = orderId;
         this.userName = userName;
         this.orderDate = orderDate;
@@ -30,4 +30,5 @@ public class OrderFlatDto {
         this.orderPrice = orderPrice;
         this.count = count;
     }
+
 }

@@ -3,7 +3,8 @@ package com.github.hjdeepsleep.toy.adapter.presentation.web.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class BookForm {
 
     private Long id;
@@ -13,4 +14,5 @@ public class BookForm {
 
     private String author;
     private String isbn;
+
 }

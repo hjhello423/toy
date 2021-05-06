@@ -1,14 +1,13 @@
 package com.github.hjdeepsleep.toy.adapter.infrastructor.init;
 
 import com.github.hjdeepsleep.toy.domain.item.Item;
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 @Profile("local")
 @Component
@@ -36,4 +35,5 @@ public class InitItem {
             em.persist(item2);
         }
     }
+
 }

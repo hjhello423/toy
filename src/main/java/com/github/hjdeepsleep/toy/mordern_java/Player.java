@@ -8,8 +8,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class Player {
+
     private final String name;
     private final boolean enroll;
     private final int height;
     private final SportType sportType;
+
 }

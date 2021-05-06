@@ -7,14 +7,13 @@ import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.ord
 import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.order.Order;
 import com.github.hjdeepsleep.toy.enums.OrderStatus;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,8 +37,8 @@ public class OrderSimpleApiController {
     public List<SimpleOrderDto> ordersV2() {
         List<Order> orders = orderJpqlRepository.findAll(new OrderSearch());
         List<SimpleOrderDto> result = orders.stream()
-                .map(SimpleOrderDto::new)
-                .collect(Collectors.toList());
+            .map(SimpleOrderDto::new)
+            .collect(Collectors.toList());
 
         return result;
     }
@@ -48,8 +47,8 @@ public class OrderSimpleApiController {
     public List<SimpleOrderDto> ordersV3() {
         List<Order> orders = orderJpqlRepository.findAllWithMemberDelivery();
         List<SimpleOrderDto> result = orders.stream()
-                .map(SimpleOrderDto::new)
-                .collect(Collectors.toList());
+            .map(SimpleOrderDto::new)
+            .collect(Collectors.toList());
 
         return result;
     }
@@ -61,6 +60,7 @@ public class OrderSimpleApiController {
 
     @Data
     static class SimpleOrderDto {
+
         private Long orderId;
         private String userName;
         private LocalDateTime orderDate;
@@ -75,4 +75,5 @@ public class OrderSimpleApiController {
             this.address = order.getDelivery().getAddress();
         }
     }
+
 }

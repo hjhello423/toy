@@ -1,22 +1,31 @@
 package com.github.hjdeepsleep.toy.domain.order;
 
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
+import static lombok.AccessLevel.PROTECTED;
+
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.enums.DeliveryStatus;
 import com.github.hjdeepsleep.toy.enums.OrderStatus;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import static javax.persistence.EnumType.STRING;
-import static javax.persistence.FetchType.LAZY;
-import static lombok.AccessLevel.PROTECTED;
 
 @ToString
 @Getter
@@ -102,7 +111,8 @@ public class Order {
      */
     public int getTotalPrice() {
         return orderItems.stream()
-                .mapToInt(OrderItem::getTotalPrice)
-                .sum();
+            .mapToInt(OrderItem::getTotalPrice)
+            .sum();
     }
+
 }

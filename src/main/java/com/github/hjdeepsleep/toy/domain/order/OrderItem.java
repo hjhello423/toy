@@ -1,17 +1,22 @@
 package com.github.hjdeepsleep.toy.domain.order;
 
+import static javax.persistence.FetchType.LAZY;
+import static lombok.AccessLevel.PROTECTED;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.hjdeepsleep.toy.domain.item.Item;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-
-import static javax.persistence.FetchType.LAZY;
-import static lombok.AccessLevel.PROTECTED;
-
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor(access = PROTECTED)
 public class OrderItem {
@@ -41,6 +46,7 @@ public class OrderItem {
         item.removeStock(count);
         return orderItem;
     }
+
     public void cancel() {
         item.addStock(count);
     }
@@ -48,4 +54,5 @@ public class OrderItem {
     public int getTotalPrice() {
         return orderPrice * count;
     }
+
 }

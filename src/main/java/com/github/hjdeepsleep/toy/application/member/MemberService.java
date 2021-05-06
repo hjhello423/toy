@@ -2,11 +2,10 @@ package com.github.hjdeepsleep.toy.application.member;
 
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.member.MemberJpqlRepository;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -48,4 +47,5 @@ public class MemberService {
         Member member = memberRepository.findOne(id);
         member.setUsername(userName);
     }
+
 }

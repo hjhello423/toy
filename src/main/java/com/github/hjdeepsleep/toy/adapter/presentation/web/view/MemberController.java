@@ -4,15 +4,14 @@ import com.github.hjdeepsleep.toy.adapter.presentation.web.dto.MemberForm;
 import com.github.hjdeepsleep.toy.application.member.MemberService;
 import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
+import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,4 +47,5 @@ public class MemberController {
         model.addAttribute("members", members);
         return "members/memberList";
     }
+
 }
