@@ -1,6 +1,5 @@
 package com.github.hjdeepsleep.toy.adapter.infrastructor.init;
 
-import com.github.hjdeepsleep.toy.domain.item.Book;
 import com.github.hjdeepsleep.toy.domain.item.Item;
 import com.github.hjdeepsleep.toy.domain.mamber.Address;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;

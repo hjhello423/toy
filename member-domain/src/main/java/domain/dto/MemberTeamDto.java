@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.domain.mamber.dto;
+package domain.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

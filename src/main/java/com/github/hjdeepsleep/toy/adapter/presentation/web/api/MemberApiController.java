@@ -3,9 +3,9 @@ package com.github.hjdeepsleep.toy.adapter.presentation.web.api;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.MemberJpaRepository;
 import com.github.hjdeepsleep.toy.adapter.infrastructor.repository.MemberRepository;
 import com.github.hjdeepsleep.toy.application.member.MemberService;
-import com.github.hjdeepsleep.toy.domain.mamber.Member;
-import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
-import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberTeamDto;
+//import com.github.hjdeepsleep.toy.domain.mamber.Member;
+//import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberSearchCondition;
+//import com.github.hjdeepsleep.toy.domain.mamber.dto.MemberTeamDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController("memberApiController")

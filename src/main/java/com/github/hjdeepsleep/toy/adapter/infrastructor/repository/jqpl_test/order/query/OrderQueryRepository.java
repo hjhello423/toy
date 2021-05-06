@@ -19,7 +19,7 @@ public class OrderQueryRepository {
     private final EntityManager em;
 
     public List<OrderSimpleQueryDto> findOrderDots() {
-        return em.createQuery("select new com.github.hjdeepsleep.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderSimpleQueryDto(o.id, m.username, o.orderDate, o.status, d.address)" +
+        return em.createQuery("select new com.github.00hongjun.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderSimpleQueryDto(o.id, m.username, o.orderDate, o.status, d.address)" +
                 "from Order o " +
                 "join o.member m " +
                 "join o.delivery d ", OrderSimpleQueryDto.class)

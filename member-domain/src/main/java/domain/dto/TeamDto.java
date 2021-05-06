@@ -1,8 +1,8 @@
-package com.github.hjdeepsleep.toy.domain.mamber.dto;
+package domain.dto;
 
-import com.github.hjdeepsleep.toy.domain.mamber.Member;
-import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.querydsl.core.annotations.QueryProjection;
+import domain.Member;
+import domain.Team;
 import lombok.Getter;
 import lombok.ToString;
 

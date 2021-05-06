@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.domain.mamber;
+package domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "name", "rank", "members"})
 public class Team {
 

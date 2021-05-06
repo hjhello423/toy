@@ -3,7 +3,6 @@ package com.github.hjdeepsleep.toy.domain.member;
 import com.github.hjdeepsleep.toy.domain.mamber.Member;
 import com.github.hjdeepsleep.toy.domain.mamber.Team;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.QTeamDto;
-import com.github.hjdeepsleep.toy.domain.mamber.dto.QTeamDto2;
 import com.github.hjdeepsleep.toy.domain.mamber.dto.TeamDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;

@@ -1,1 +1,5 @@
 rootProject.name = 'toy'
+
+include 'member-internal-api'
+include 'member-domain'
+

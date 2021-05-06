@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.domain.mamber.dto;
+package domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

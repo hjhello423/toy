@@ -1,7 +1,6 @@
-package com.github.hjdeepsleep.toy.domain.mamber;
+package domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.hjdeepsleep.toy.domain.order.Order;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +33,7 @@ public class Member {
     private List<Order> orders = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
 

@@ -1,4 +1,4 @@
-package com.github.hjdeepsleep.toy.domain.mamber;
+package domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @Embeddable
-@NoArgsConstructor(access = PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Address {
 
