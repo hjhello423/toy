@@ -6,6 +6,11 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  security:
+    user:
+      name: test
+      password: 123
+      roles: ADMIN
 
   jpa:
     hibernate:
