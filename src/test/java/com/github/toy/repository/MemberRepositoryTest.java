@@ -7,7 +7,7 @@ import com.github.toy.member.domain.QMember;
 import com.github.toy.member.domain.Team;
 import com.github.toy.member.domain.dto.MemberSearchCondition;
 import com.github.toy.member.domain.dto.MemberTeamDto;
-import com.github.toy.member.infrastructor.repository.MemberRepository;
+import com.github.toy.member.infrastructure.repository.MemberRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;

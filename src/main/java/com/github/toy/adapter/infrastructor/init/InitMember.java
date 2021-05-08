@@ -1,6 +1,6 @@
 package com.github.toy.adapter.infrastructor.init;
 
-import com.github.toy.domain.item.Item;
+import com.github.toy.item.domain.Item;
 import com.github.toy.member.domain.Address;
 import com.github.toy.member.domain.Member;
 import com.github.toy.member.domain.Team;

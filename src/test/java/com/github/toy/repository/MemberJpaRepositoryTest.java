@@ -1,6 +1,6 @@
 package com.github.toy.repository;
 
-import com.github.toy.member.infrastructor.repository.MemberJpaRepository;
+import com.github.toy.member.infrastructure.repository.MemberJpaRepository;
 import com.github.toy.member.domain.Member;
 import com.github.toy.member.domain.Team;
 import com.github.toy.member.domain.dto.MemberSearchCondition;

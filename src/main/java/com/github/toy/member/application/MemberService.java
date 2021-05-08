@@ -1,6 +1,6 @@
 package com.github.toy.member.application;
 
-import com.github.toy.member.infrastructor.jpql_test.MemberJpqlRepository;
+import com.github.toy.member.infrastructure.jpql_test.MemberJpqlRepository;
 import com.github.toy.member.domain.Member;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

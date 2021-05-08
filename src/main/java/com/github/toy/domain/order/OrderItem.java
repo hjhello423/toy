@@ -4,7 +4,7 @@ import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.toy.domain.item.Item;
+import com.github.toy.item.domain.Item;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

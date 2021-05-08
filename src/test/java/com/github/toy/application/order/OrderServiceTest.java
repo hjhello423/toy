@@ -1,7 +1,8 @@
 package com.github.toy.application.order;
 
-import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.OrderJpqlRepository;
-import com.github.toy.domain.item.Book;
+import com.github.toy.order.application.OrderService;
+import com.github.toy.order.infrastructure.jpql_test.OrderJpqlRepository;
+import com.github.toy.item.domain.Book;
 import com.github.toy.member.domain.Address;
 import com.github.toy.member.domain.Member;
 import com.github.toy.domain.order.Order;
@@ -22,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderServiceTest {
 
     @Autowired EntityManager em;
-    @Autowired OrderService orderService;
+    @Autowired
+    OrderService orderService;
     @Autowired
     OrderJpqlRepository orderJpqlRepository;
 

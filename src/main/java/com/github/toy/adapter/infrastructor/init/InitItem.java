@@ -1,6 +1,6 @@
 package com.github.toy.adapter.infrastructor.init;
 
-import com.github.toy.domain.item.Item;
+import com.github.toy.item.domain.Item;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
