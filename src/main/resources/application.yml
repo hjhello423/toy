@@ -18,6 +18,6 @@ spring:
         default_batch_fetch_size: 100
 
 logging.level:
-  com.github.hjdeepsleep.toy : debug
+  com.github.toy : debug
   org.hibernate.SQL: debug
   org.hibernate.type: trace
