@@ -1,7 +1,8 @@
 package com.github.toy.application.member;
 
-import com.github.toy.adapter.infrastructor.repository.jqpl_test.member.MemberJpqlRepository;
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.application.MemberService;
+import com.github.toy.member.infrastructor.jpql_test.MemberJpqlRepository;
+import com.github.toy.member.domain.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

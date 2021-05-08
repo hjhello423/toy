@@ -1,7 +1,7 @@
 package com.github.toy.domain.member;
 
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.Team;
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.Team;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;

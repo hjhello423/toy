@@ -2,10 +2,10 @@ package com.github.toy.adapter.presentation.web.view;
 
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.OrderSearch;
 import com.github.toy.application.item.ItemService;
-import com.github.toy.application.member.MemberService;
+import com.github.toy.member.application.MemberService;
 import com.github.toy.application.order.OrderService;
 import com.github.toy.domain.item.Item;
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.domain.Member;
 import com.github.toy.domain.order.Order;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

@@ -10,7 +10,7 @@ import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.dto.Order
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderItemQueryDto;
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.dto.OrderQueryDto;
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.query.OrderQueryRepository;
-import com.github.toy.domain.mamber.Address;
+import com.github.toy.member.domain.Address;
 import com.github.toy.domain.order.Order;
 import com.github.toy.domain.order.OrderItem;
 import com.github.toy.enums.OrderStatus;

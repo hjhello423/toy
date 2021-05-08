@@ -1,6 +1,6 @@
-package com.github.toy.adapter.infrastructor.repository.jqpl_test.member;
+package com.github.toy.member.infrastructor.jpql_test;
 
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.domain.Member;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

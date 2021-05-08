@@ -1,7 +1,7 @@
-package com.github.toy.application.member;
+package com.github.toy.member.application;
 
-import com.github.toy.adapter.infrastructor.repository.jqpl_test.member.MemberJpqlRepository;
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.infrastructor.jpql_test.MemberJpqlRepository;
+import com.github.toy.member.domain.Member;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

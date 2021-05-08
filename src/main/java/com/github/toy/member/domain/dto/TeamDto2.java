@@ -1,7 +1,7 @@
-package com.github.toy.domain.mamber.dto;
+package com.github.toy.member.domain.dto;
 
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.Team;
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.Team;
 import com.querydsl.core.annotations.QueryProjection;
 import java.util.List;
 import lombok.Getter;

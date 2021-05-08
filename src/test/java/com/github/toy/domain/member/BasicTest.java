@@ -1,12 +1,17 @@
 package com.github.toy.domain.member;
 
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.QMember;
-import com.github.toy.domain.mamber.Team;
-import com.github.toy.domain.mamber.dto.MemberDto;
-import com.github.toy.domain.mamber.dto.QMemberDto;
-import com.github.toy.domain.mamber.dto.UserDto;
-import com.github.toy.domain.mamber.QTeam;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.QMember;
+import com.github.toy.member.domain.QTeam;
+import com.github.toy.member.domain.Team;
+import com.github.toy.member.domain.dto.MemberDto;
+import com.github.toy.member.domain.dto.QMemberDto;
+import com.github.toy.member.domain.dto.UserDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
@@ -17,6 +22,10 @@ import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,13 +33,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -564,7 +566,7 @@ public class BasicTest {
     @Test
     public void dto_projection() throws Exception {
         //given
-        List<MemberDto> result = em.createQuery("select new com.github.hjdeepsleep.toy.domain.mamber.dto.MemberDto(m.username, m.age) from Member m", MemberDto.class)
+        List<MemberDto> result = em.createQuery("select new com.github.toy.member.domain.dto.MemberDto(m.username, m.age) from Member m", MemberDto.class)
                 .getResultList();
 
         //then

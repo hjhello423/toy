@@ -1,10 +1,10 @@
 package com.github.toy.repository;
 
-import com.github.toy.adapter.infrastructor.repository.MemberJpaRepository;
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.Team;
-import com.github.toy.domain.mamber.dto.MemberSearchCondition;
-import com.github.toy.domain.mamber.dto.MemberTeamDto;
+import com.github.toy.member.infrastructor.repository.MemberJpaRepository;
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.Team;
+import com.github.toy.member.domain.dto.MemberSearchCondition;
+import com.github.toy.member.domain.dto.MemberTeamDto;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,22 +1,21 @@
 package com.github.toy.repository;
 
-import com.github.toy.adapter.infrastructor.repository.MemberRepository;
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.QMember;
-import com.github.toy.domain.mamber.Team;
-import com.github.toy.domain.mamber.dto.MemberSearchCondition;
-import com.github.toy.domain.mamber.dto.MemberTeamDto;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.QMember;
+import com.github.toy.member.domain.Team;
+import com.github.toy.member.domain.dto.MemberSearchCondition;
+import com.github.toy.member.domain.dto.MemberTeamDto;
+import com.github.toy.member.infrastructor.repository.MemberRepository;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -131,8 +130,8 @@ class MemberRepositoryTest {
 
         //when
         Iterable<Member> result = memberRepository.findAll(
-                member.age.between(10, 40)
-                        .and(member.username.eq("member1")));
+            member.age.between(10, 40)
+                .and(member.username.eq("member1")));
 
         //then
         for (Member findMember : result) {

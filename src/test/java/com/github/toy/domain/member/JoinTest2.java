@@ -1,22 +1,21 @@
 package com.github.toy.domain.member;
 
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.Team;
-import com.github.toy.domain.mamber.dto.QTeamDto;
-import com.github.toy.domain.mamber.dto.TeamDto;
+import static com.github.toy.member.domain.QMember.member;
+import static com.github.toy.member.domain.QTeam.team;
+
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.Team;
+import com.github.toy.member.domain.dto.QTeamDto;
+import com.github.toy.member.domain.dto.TeamDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static com.github.toy.domain.mamber.QMember.member;
-import static com.github.toy.domain.mamber.QTeam.team;
 
 @SpringBootTest
 @Transactional

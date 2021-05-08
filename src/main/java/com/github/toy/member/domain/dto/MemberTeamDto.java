@@ -1,4 +1,4 @@
-package com.github.toy.domain.mamber.dto;
+package com.github.toy.member.domain.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

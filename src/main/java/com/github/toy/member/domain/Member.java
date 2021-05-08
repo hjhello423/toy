@@ -1,4 +1,4 @@
-package com.github.toy.domain.mamber;
+package com.github.toy.member.domain;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -32,10 +32,12 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
     @NotEmpty
+    @Column(unique = true)
     private String username;
     private int age;
     @Embedded
     private Address address;
+    private String role;
 
     @JsonIgnore
     @OneToMany(mappedBy = "member")

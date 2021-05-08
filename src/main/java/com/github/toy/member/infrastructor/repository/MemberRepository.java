@@ -1,6 +1,6 @@
-package com.github.toy.adapter.infrastructor.repository;
+package com.github.toy.member.infrastructor.repository;
 
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.domain.Member;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;

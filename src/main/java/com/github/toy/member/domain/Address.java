@@ -1,4 +1,4 @@
-package com.github.toy.domain.mamber;
+package com.github.toy.member.domain;
 
 import static lombok.AccessLevel.PROTECTED;
 

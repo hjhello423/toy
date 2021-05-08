@@ -4,7 +4,7 @@ import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.toy.domain.mamber.Address;
+import com.github.toy.member.domain.Address;
 import com.github.toy.enums.DeliveryStatus;
 import javax.persistence.Column;
 import javax.persistence.Embedded;

@@ -1,6 +1,6 @@
 package com.github.toy.adapter.infrastructor.repository.jqpl_test.order.dto;
 
-import com.github.toy.domain.mamber.Address;
+import com.github.toy.member.domain.Address;
 import com.github.toy.enums.OrderStatus;
 import java.time.LocalDateTime;
 import lombok.Getter;

@@ -2,8 +2,8 @@ package com.github.toy.application.order;
 
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.OrderJpqlRepository;
 import com.github.toy.domain.item.Book;
-import com.github.toy.domain.mamber.Address;
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.domain.Address;
+import com.github.toy.member.domain.Member;
 import com.github.toy.domain.order.Order;
 import com.github.toy.enums.OrderStatus;
 import com.github.toy.exception.NotEnoughStockException;

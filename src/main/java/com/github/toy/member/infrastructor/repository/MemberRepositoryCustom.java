@@ -1,7 +1,7 @@
-package com.github.toy.adapter.infrastructor.repository;
+package com.github.toy.member.infrastructor.repository;
 
-import com.github.toy.domain.mamber.dto.MemberSearchCondition;
-import com.github.toy.domain.mamber.dto.MemberTeamDto;
+import com.github.toy.member.domain.dto.MemberSearchCondition;
+import com.github.toy.member.domain.dto.MemberTeamDto;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

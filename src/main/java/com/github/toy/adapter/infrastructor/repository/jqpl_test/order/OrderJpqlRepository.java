@@ -1,6 +1,6 @@
 package com.github.toy.adapter.infrastructor.repository.jqpl_test.order;
 
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.domain.Member;
 import com.github.toy.domain.order.Order;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,13 @@
-package com.github.toy.adapter.infrastructor.repository;
+package com.github.toy.member.infrastructor.repository;
 
-import static com.github.toy.domain.mamber.QMember.member;
-import static com.github.toy.domain.mamber.QTeam.team;
+import static com.github.toy.member.domain.QMember.member;
+import static com.github.toy.member.domain.QTeam.team;
 import static org.springframework.util.StringUtils.hasText;
 
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.dto.MemberSearchCondition;
-import com.github.toy.domain.mamber.dto.MemberTeamDto;
-import com.github.toy.domain.mamber.dto.QMemberTeamDto;
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.dto.MemberSearchCondition;
+import com.github.toy.member.domain.dto.MemberTeamDto;
+import com.github.toy.member.domain.dto.QMemberTeamDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -37,7 +37,7 @@ public class MemberRepositoryImpl
     @Override
     public List<MemberTeamDto> search(MemberSearchCondition condition) {
 
-//        List<MemberTeamDto> reseult = from(member)
+//        List`<MemberTeamDto> reseult = from(member)
 //                .leftJoin(member.team, team)
 //                .where(usernameEq(condition.getUsername()),
 //                        teamNameEq(condition.getTeamName()),

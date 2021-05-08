@@ -4,7 +4,7 @@ import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.domain.Member;
 import com.github.toy.enums.DeliveryStatus;
 import com.github.toy.enums.OrderStatus;
 import java.time.LocalDateTime;

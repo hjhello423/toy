@@ -1,9 +1,9 @@
 package com.github.toy.adapter.presentation.web.view;
 
 import com.github.toy.adapter.presentation.web.dto.MemberForm;
-import com.github.toy.application.member.MemberService;
-import com.github.toy.domain.mamber.Address;
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.application.MemberService;
+import com.github.toy.member.domain.Address;
+import com.github.toy.member.domain.Member;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,11 +1,11 @@
 package com.github.toy.application.order;
 
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.item.ItemJpqlRepository;
-import com.github.toy.adapter.infrastructor.repository.jqpl_test.member.MemberJpqlRepository;
+import com.github.toy.member.infrastructor.jpql_test.MemberJpqlRepository;
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.OrderJpqlRepository;
 import com.github.toy.adapter.infrastructor.repository.jqpl_test.order.OrderSearch;
 import com.github.toy.domain.item.Item;
-import com.github.toy.domain.mamber.Member;
+import com.github.toy.member.domain.Member;
 import com.github.toy.domain.order.Delivery;
 import com.github.toy.domain.order.Order;
 import com.github.toy.domain.order.OrderItem;

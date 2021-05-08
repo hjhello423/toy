@@ -1,11 +1,11 @@
-package com.github.toy.adapter.presentation.web.api;
+package com.github.toy.member.client;
 
-import com.github.toy.adapter.infrastructor.repository.MemberJpaRepository;
-import com.github.toy.adapter.infrastructor.repository.MemberRepository;
-import com.github.toy.application.member.MemberService;
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.dto.MemberSearchCondition;
-import com.github.toy.domain.mamber.dto.MemberTeamDto;
+import com.github.toy.member.application.MemberService;
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.dto.MemberSearchCondition;
+import com.github.toy.member.domain.dto.MemberTeamDto;
+import com.github.toy.member.infrastructor.repository.MemberJpaRepository;
+import com.github.toy.member.infrastructor.repository.MemberRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;

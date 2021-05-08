@@ -1,9 +1,9 @@
 package com.github.toy.adapter.infrastructor.init;
 
 import com.github.toy.domain.item.Item;
-import com.github.toy.domain.mamber.Address;
-import com.github.toy.domain.mamber.Member;
-import com.github.toy.domain.mamber.Team;
+import com.github.toy.member.domain.Address;
+import com.github.toy.member.domain.Member;
+import com.github.toy.member.domain.Team;
 import com.github.toy.domain.order.Delivery;
 import com.github.toy.domain.order.Order;
 import com.github.toy.domain.order.OrderItem;
