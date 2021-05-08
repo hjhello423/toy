@@ -1,17 +1,23 @@
 package com.github.toy.adapter.presentation.web.view;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Slf4j
 @Controller
 public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        log.info("home controller");
         return "home";
     }
 
+    @RequestMapping("/info")
+    public String info() {
+        return "info";
+    }
+
+    @RequestMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
 }
