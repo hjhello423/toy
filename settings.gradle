@@ -1,1 +1,4 @@
 rootProject.name = 'toy'
+
+include 'module-study-library'
+include 'module-study-application'
