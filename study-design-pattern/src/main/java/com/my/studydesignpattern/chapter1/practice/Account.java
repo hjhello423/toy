@@ -1,4 +1,4 @@
-package com.my.studydesignpattern.chapter1;
+package com.my.studydesignpattern.chapter1.practice;
 
 /*
 chapter1 연습문제 7번, 55p
