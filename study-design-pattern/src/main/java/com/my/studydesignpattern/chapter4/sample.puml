@@ -1,0 +1,19 @@
+@startuml
+client -> A1 ++ : doA1()
+'activate A1
+
+A1 -> A2 ++ : <<create>>
+deactivate A2
+
+A1 -> A2 ++ : doA2(this)
+A2 -> A1: doIt()
+deactivate A2
+
+A1 -> A3 ++ : <<create>>
+deactivate A3
+
+A1 -> A3 ++ : doA3(a2)
+A3 -> A2: doThat()
+deactivate A3
+
+@enduml

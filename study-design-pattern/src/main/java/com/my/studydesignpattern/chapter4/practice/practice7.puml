@@ -1,0 +1,35 @@
+@startuml
+
+client -> GUI ++ : <<create>>
+GUI -> Frame : super("순차 다이어그램")
+
+GUI -> GUI ++ : this.init()
+GUI -> GridLayout ++ : <<create>> layout:new
+deactivate GridLayout
+GUI -> GUI : this.setLayout(layout)
+
+skinparam guillemet false
+participant "p1" as p1 << Panel >>
+GUI -> p1 ++ : <<create>>
+deactivate p1
+
+GUI -> p1 : add("west", w)
+GUI -> p1 : add("center", tf)
+
+GUI -> FlowLayout ++ : <<create>> flowLayout:new(FlowLayout.CENTER)
+deactivate FlowLayout
+
+skinparam guillemet false
+participant "p2" as p2 << Panel >>
+GUI -> "p2" ++ : <<create>> new(flowLayout)
+deactivate "p2"
+
+GUI -> p2 : add(b)
+
+GUI -> GUI : add(p2)
+
+GUI -> GUI : this.setSize(500, 250)
+GUI -> GUI : this.setVisible(true)
+deactivate GUI
+
+@enduml
