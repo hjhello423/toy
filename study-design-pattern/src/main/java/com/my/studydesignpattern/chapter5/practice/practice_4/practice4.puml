@@ -1,0 +1,36 @@
+@startuml
+
+interface Runnable
+class BallFrame
+class Field
+class Ball
+
+abstract DirectionStrategy
+class HorizonalMoveStrategy
+class VerticalMoveStrategy
+class DiagonalMoveStrategy
+
+abstract DrawStrategy
+class RedDrawStrategy
+class BlueDrawStrategy
+
+JFrame <|-- BallFrame
+BallFrame *--o Field
+JPanel <|-- Field
+Runnable <|.. Field
+
+BallFrame --> Ball
+
+Ball o-> DrawStrategy
+Ball o-> DirectionStrategy
+
+DrawStrategy <|.. RedDrawStrategy
+DrawStrategy <|.. BlueDrawStrategy
+
+DirectionStrategy <|.. HorizonalMoveStrategy
+DirectionStrategy <|.. VerticalMoveStrategy
+DirectionStrategy <|.. DiagonalMoveStrategy
+
+
+
+@enduml
