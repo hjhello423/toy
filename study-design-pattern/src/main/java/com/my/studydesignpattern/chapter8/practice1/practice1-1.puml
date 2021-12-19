@@ -1,0 +1,20 @@
+@startuml
+
+interface PriceStrategy
+class MemberDiscountPolicy
+class BookDiscountPolicy
+class NonDiscountPolicy
+
+PriceStrategy <.. MemberDiscountPolicy
+PriceStrategy <.. BookDiscountPolicy
+PriceStrategy <.. NonDiscountPolicy
+
+class Member
+class Book
+class Rent
+
+Rent --* Member
+Rent --* Book
+Rent *--> PriceStrategy
+
+@enduml

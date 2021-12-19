@@ -1,0 +1,43 @@
+@startuml
+
+class Client {
+}
+
+class Invoker {
+- command : Command
++ setCommand(command : Command)
++ execute()
+}
+
+interface Command {
++ execute()
+}
+
+class CommandA {
+- receiver
+- param
++ CommandA(receiver, param)
++ execute()
+}
+
+class CommandB {
+- receiver
+- param
++ CommandB(receiver, param)
++ execute()
+}
+
+class Receiver {
++ do()
+}
+
+Client --> Invoker
+Client -> Receiver
+Receiver <-- CommandA : receiver.do(param)
+
+Invoker -> Command
+Command <|.. CommandA
+Command <|.. CommandB
+
+
+@enduml
