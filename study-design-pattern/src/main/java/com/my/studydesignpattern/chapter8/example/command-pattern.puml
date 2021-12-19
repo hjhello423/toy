@@ -1,14 +1,43 @@
 @startuml
 
-class Button {
-+ Button(lamp : Lamp)
-+ pressed() : void
+class Client {
 }
 
-class Lamp {
-+ turnOn : void
+class Invoker {
+- command : Command
++ setCommand(command : Command)
++ execute()
 }
 
-Button -> Lamp
+interface Command {
++ execute()
+}
+
+class CommandA {
+- receiver
+- param
++ CommandA(receiver, param)
++ execute()
+}
+
+class CommandB {
+- receiver
+- param
++ CommandB(receiver, param)
++ execute()
+}
+
+class Receiver {
++ do()
+}
+
+Client -> Invoker
+Receiver <- CommandA : receiver.do(param)
+
+Invoker -> Command
+Command <|.. CommandA
+Command <|... CommandB
+
+Client ---> Receiver
 
 @enduml

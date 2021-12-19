@@ -1,55 +1,101 @@
 package com.my.studydesignpattern.chapter8.example;
 
-public class Client2 {
+import java.util.Stack;
+
+public class Client3 {
 
     public static void main(String[] args) {
-        Command command = new LampCommand(new Lamp());
-        Button button = new Button(command);
-        button.pressed();
     }
 
-    private static class Button {
+    private abstract class Command {
 
-        private Command command;
+        private Application application;
+        private Editor editor;
+        private String backup;
 
-        public Button(Command command) {
-            this.command = command;
+        public Command(Application application) {
+            this.application = application;
         }
 
-        public void pressed() {
-            this.command.execute();
-        }
-    }
-
-    private static class Lamp {
-
-        public void turnOn() {
-            System.out.println("lamp on");
+        public void save() {
+            backup = editor.text;
         }
 
-        public void turnOff() {
-            System.out.println("lamp off");
+        public void undo() {
+            editor.text = backup;
         }
+
+        public abstract void execute();
 
     }
 
-    private interface Command {
+    private class SomethingCommand extends Command {
 
-        void execute();
+        private Editor editor;
 
-    }
-
-    private static class LampCommand implements Command {
-
-        private Lamp lamp;
-
-        public LampCommand(Lamp lamp) {
-            this.lamp = lamp;
+        public SomethingCommand(Application application) {
+            super(application);
         }
 
         @Override
         public void execute() {
-            lamp.turnOn();
+            save();
+            editor.doA();
+        }
+
+    }
+
+    private class UndoCommand extends Command {
+
+        private Editor editor;
+
+        public UndoCommand(Application application) {
+            super(application);
+        }
+
+        @Override
+        public void execute() {
+            undo();
+            editor.doB();
+        }
+
+    }
+
+    private static class Editor {
+
+        private String text;
+
+        public void doA() {
+        }
+
+        public void doB() {
+        }
+
+    }
+
+    private static class History {
+
+        private Stack<Command> stack;
+
+        public void push(Command c) {
+            stack.push(c);
+        }
+
+        public void pop() {
+            stack.pop();
+        }
+
+    }
+
+    private static class Application {
+
+        private Editor editor;
+        private History history;
+
+        public void operateA() {
+        }
+
+        public void operateB() {
         }
 
     }

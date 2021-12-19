@@ -1,4 +1,4 @@
-package com.my.studydesignpattern.chapter8.practice1;
+package com.my.studydesignpattern.chapter8.practice2;
 
 public class TV {
 

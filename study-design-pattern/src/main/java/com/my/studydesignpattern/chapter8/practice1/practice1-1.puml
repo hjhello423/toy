@@ -1,20 +1,19 @@
 @startuml
 
-interface PriceStrategy
-class MemberDiscountPolicy
-class BookDiscountPolicy
-class NonDiscountPolicy
+class TwoButtonController {
+- tv : TV
++ TwoButtonController(tv : TV)
++ button1Pressed() : void
++ button2Pressed() : void
+}
 
-PriceStrategy <.. MemberDiscountPolicy
-PriceStrategy <.. BookDiscountPolicy
-PriceStrategy <.. NonDiscountPolicy
+class TV {
+- powerOn : boolean
+- muteOn : boolean
++ power() : void
++ mute() : void
+}
 
-class Member
-class Book
-class Rent
-
-Rent --* Member
-Rent --* Book
-Rent *--> PriceStrategy
+TwoButtonController -> TV
 
 @enduml

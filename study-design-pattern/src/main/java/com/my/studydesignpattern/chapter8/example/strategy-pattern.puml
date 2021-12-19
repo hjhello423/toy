@@ -3,41 +3,33 @@
 class Client {
 }
 
-class Invoker {
-- command : Command
-+ setCommand(command : Command)
-+ execute()
-}
-
-interface Command {
-+ execute()
-}
-
-class CommandA {
-- receiver
-- param
-+ CommandA(receiver, param)
-+ execute()
-}
-
-class CommandB {
-- receiver
-- param
-+ CommandB(receiver, param)
-+ execute()
-}
-
-class Receiver {
+class Context {
+- strategy : Strategy
++ setStrategy(strategy : Strategy)
 + do()
 }
 
-Client --> Invoker
-Client -> Receiver
-Receiver <-- CommandA : receiver.do(param)
+interface Strategy {
++ execute()
+}
 
-Invoker -> Command
-Command <|.. CommandA
-Command <|.. CommandB
+class StrategyA {
++ execute()
+}
+
+class StrategyB {
++ execute()
+}
+
+class StrategyC {
++ execute()
+}
 
 
+Context o-> Strategy
+Strategy <|... StrategyA
+Strategy <|... StrategyB
+Strategy <|... StrategyC
+Client -> Context
+Client ...> StrategyA
 @enduml

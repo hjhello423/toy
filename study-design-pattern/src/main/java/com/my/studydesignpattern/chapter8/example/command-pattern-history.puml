@@ -1,6 +1,13 @@
 @startuml
 
-class Client {
+class Application {
+- editor:Editor
+- history:History
+}
+
+class History {
++ push()
++ pop()
 }
 
 class Invoker {
@@ -9,35 +16,41 @@ class Invoker {
 + execute()
 }
 
-interface Command {
+abstract Command {
+- application : Application
+- receiver : Receiver
++ save()
++ undo()
 + execute()
 }
 
-class CommandA {
+class SomethingCommand {
 - receiver
-- param
-+ CommandA(receiver, param)
 + execute()
 }
 
-class CommandB {
+class UndoCommand {
 - receiver
-- param
-+ CommandB(receiver, param)
 + execute()
 }
 
 class Receiver {
-+ do()
++ doA()
++ doB()
 }
 
-Client -> Invoker
-Receiver <- CommandA : receiver.do(param)
+Application --> Invoker
+History -> Command
+Command <|... UndoCommand
+Command <|... SomethingCommand
+
+
+Receiver <- SomethingCommand
 
 Invoker -> Command
-Command <|.. CommandA
-Command <|... CommandB
 
-Client ---> Receiver
+Application ---> Receiver
+Application ---> History
+
 
 @enduml

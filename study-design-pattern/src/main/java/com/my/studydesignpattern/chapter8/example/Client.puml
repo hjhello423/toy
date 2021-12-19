@@ -1,19 +1,14 @@
 @startuml
 
-class TwoButtonController {
-- tv : TV
-+ TwoButtonController(tv : TV)
-+ button1Pressed() : void
-+ button2Pressed() : void
+class Button {
++ Button(lamp : Lamp)
++ pressed() : void
 }
 
-class TV {
-- powerOn : boolean
-- muteOn : boolean
-+ power() : void
-+ mute() : void
+class Lamp {
++ turnOn : void
 }
 
-TwoButtonController -> TV
+Button -> Lamp
 
 @enduml

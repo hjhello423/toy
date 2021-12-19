@@ -8,13 +8,31 @@ class TwoButtonController {
 + button2() : void
 }
 
+interface Command {
++ execute() : void
+}
+
+class Power {
++ excute() : void
+}
+
+class Mute {
++ excute() : void
+}
+
 class TV {
 - powerOn : boolean
 - muteOn : boolean
 + power() : void
-+mute() : void
++ mute() : void
 }
 
-TwoButtonController -> TV
+TwoButtonController *-> Command
+Command <.. Power
+Command <.. Mute
+
+Power ..> TV
+Mute ..> TV
+
 
 @enduml
