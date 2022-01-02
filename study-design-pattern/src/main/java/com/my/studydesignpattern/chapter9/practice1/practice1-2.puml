@@ -1,0 +1,22 @@
+@startuml
+
+class Battery {
++ setDisplay(display : BatteryLevelDisplay)
++ setWarning(warning : LowBatteryWarning)
++ consume()
++ getLevel()
+}
+
+class BatteryLevelDisplay {
++ update()
+}
+
+class LowBatteryWarning {
++ update()
+}
+
+Battery <--> BatteryLevelDisplay
+
+LowBatteryWarning <-> Battery
+
+@enduml

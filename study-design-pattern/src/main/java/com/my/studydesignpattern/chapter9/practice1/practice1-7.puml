@@ -1,0 +1,37 @@
+@startuml
+
+class Subject {
++ attach(observer : Observer)
++ detach(observer : Observer)
++ modifyObserver()
+}
+
+interface Observer {
++ update()
+}
+
+class Battery {
+- level : int
++ consume()
++ getLevel()
+}
+
+class BatteryLevelDisplay {
++ update()
+}
+
+class LowBatteryWarning {
++ update()
+}
+
+Subject -> Observer
+
+Observer <|--- BatteryLevelDisplay
+Observer <|--- LowBatteryWarning
+Battery --> Subject
+BatteryLevelDisplay <--- Battery
+LowBatteryWarning <--- Battery
+
+
+
+@enduml
