@@ -1,0 +1,8 @@
+@startuml
+
+MotorFactory ..> Motor
+
+Motor <|.. LGMotor
+Motor <|.. HyundaiMotor
+
+@enduml

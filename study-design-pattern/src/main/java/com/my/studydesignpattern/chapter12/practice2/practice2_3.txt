@@ -1,0 +1,4 @@
+context : Car
+state : CarState
+concrete state : NormalState, LimpState
+

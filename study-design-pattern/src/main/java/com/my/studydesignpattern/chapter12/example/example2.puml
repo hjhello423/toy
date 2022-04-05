@@ -1,0 +1,25 @@
+@startuml
+
+class ElevatorManager {
++ ElevatorManager(ControllerCout: int)
++ requestElevator(destination: int, direction: Direction): void
+}
+
+interface ElevatorScheduler {
++ selectElevator(manager: ElevatorManager, destination: int, direction: direction): int
+}
+
+class ResponseTimeScheduler {
++ selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+class ThroughputScheduler {
++ selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+ElevatorManager ..>  ElevatorScheduler
+ElevatorScheduler <|..  ResponseTimeScheduler
+ElevatorScheduler <|.. ThroughputScheduler
+
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+
+interface CarState {
+}
+
+Car ..> CarStateFactory
+CarStateFactory ..> CarState
+NormalState ...|> CarState
+LimpState ..|> CarState
+
+
+@enduml

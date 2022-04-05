@@ -1,0 +1,24 @@
+@startuml
+
+class ElevatorManager {
++ ElevatorManager(ControllerCout: int)
++ requestElevator(destination: int, direction: Direction): void
+}
+
+class ElevatorController {
+- id: int
+- curFloor: int
++ ElevatorController(id: int)
++ gotoFloor(destination: int): void
+}
+
+class ThroughputScheduler {
++ selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+ElevatorManager *-- "1..*" ElevatorController
+
+ElevatorManager *--> "scheduler" ThroughputScheduler
+
+
+@enduml

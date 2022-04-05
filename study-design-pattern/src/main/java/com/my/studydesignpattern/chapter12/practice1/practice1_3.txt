@@ -1,0 +1,4 @@
+abstract class : Motor
+concrete class : LGMotor, HyundaiMotor
+template method : move()
+hook method : moveMotor()

@@ -1,0 +1,7 @@
+@startuml
+
+ElevatorController -->  Motor
+Motor <|-- LGMotor
+Motor <|-- HyundaiMotor
+
+@enduml
