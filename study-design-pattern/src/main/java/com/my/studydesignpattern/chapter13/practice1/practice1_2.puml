@@ -1,0 +1,33 @@
+@startuml
+
+abstract GPS{
+}
+
+abstract Map{
+}
+
+abstract Screen{
+}
+
+abstract PathFinder{
+}
+
+class Path{
+}
+
+GPS <|-- CheapGPS
+GPS <|-- ExpensiveGPS
+
+Map <|-- SmallMap
+Map <|-- LargeMap
+
+Screen <|-- SDScreen
+Screen <|-- HDScreen
+
+PathFinder <|-- SlowPathFinder
+PathFinder <|-- FastPathFinder
+
+
+
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+
+abstract Factory{
++ createGPS: GPS
++ createMap: Map
++ createScreen: Screen
++ createPathFinder: PathFinder
+}
+
+class BasicModelFactory{
++ createGPS: GPS
++ createMap: Map
++ createScreen: Screen
++ createPathFinder: PathFinder
+}
+
+class PremiumModelFactory{
++ createGPS: GPS
++ createMap: Map
++ createScreen: Screen
++ createPathFinder: PathFinder
+}
+
+Factory <|-- BasicModelFactory
+Factory <|-- PremiumModelFactory
+
+
+
+@enduml

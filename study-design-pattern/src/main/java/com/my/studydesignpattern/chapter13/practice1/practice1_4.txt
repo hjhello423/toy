@@ -1,0 +1,5 @@
+AbstractFactory : Factory
+ConcreteFactory : BasicModelFactory,PremiumModelFactory
+AbstractProduct : GPS, Map, Screen, PathFinder
+ConcreteProduct : CheapGPS, SmallMap, SDSScreen, SlowPathFinder, ExpensiveGPS, LargeMap, HDScreen, FastPathFinder
+
