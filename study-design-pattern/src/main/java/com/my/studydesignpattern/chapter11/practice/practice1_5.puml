@@ -1,0 +1,26 @@
+@startuml
+
+class Customer {
+- name : String
+- point : int
+}
+
+abstract Report {
++ generate()
+}
+
+class ComplexReportGenerator {
+}
+
+class SimpleReportGenerator {
+}
+
+Client -> Report
+
+Report <|-- ComplexReportGenerator
+Report <|-- SimpleReportGenerator
+
+Report  -> Customer
+
+
+@enduml
