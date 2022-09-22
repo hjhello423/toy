@@ -1,4 +1,4 @@
-package com.my.springbasicstudy.member;
+package com.my.member;
 
 public class MemberServiceImpl implements MemberService {
 
@@ -13,5 +13,4 @@ public class MemberServiceImpl implements MemberService {
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId);
     }
-
 }

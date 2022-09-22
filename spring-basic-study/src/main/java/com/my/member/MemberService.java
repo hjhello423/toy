@@ -1,9 +1,8 @@
-package com.my.springbasicstudy.member;
+package com.my.member;
 
 public interface MemberService {
 
     void join(Member member);
 
     Member findMember(Long memberId);
-
 }

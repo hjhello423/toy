@@ -1,9 +1,9 @@
-package com.my.springbasicstudy;
+package com.my;
 
-import com.my.springbasicstudy.member.Grade;
-import com.my.springbasicstudy.member.Member;
-import com.my.springbasicstudy.member.MemberService;
-import com.my.springbasicstudy.member.MemberServiceImpl;
+import com.my.member.Grade;
+import com.my.member.Member;
+import com.my.member.MemberService;
+import com.my.member.MemberServiceImpl;
 
 public class MemberApp {
 

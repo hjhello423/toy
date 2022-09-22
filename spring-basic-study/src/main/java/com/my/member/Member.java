@@ -1,4 +1,4 @@
-package com.my.springbasicstudy.member;
+package com.my.member;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,5 +16,4 @@ public class Member {
         this.name = name;
         this.grade = grade;
     }
-
 }

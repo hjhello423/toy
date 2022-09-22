@@ -1,12 +1,11 @@
-package com.my.springbasicstudy.member;
+package com.my.member;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryMemberRepository implements MemberRepository {
 
-    private static Map<Long, Member> store = new HashMap<>(); // ConcurrentHashMap -> 동시성 이슈
+    private static Map<Long, Member> store = new HashMap<>();
 
     @Override
     public void save(Member member) {
@@ -17,5 +16,4 @@ public class MemoryMemberRepository implements MemberRepository {
     public Member findById(Long memberId) {
         return store.get(memberId);
     }
-
 }

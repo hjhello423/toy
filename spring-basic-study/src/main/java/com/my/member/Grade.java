@@ -1,4 +1,4 @@
-package com.my.springbasicstudy.member;
+package com.my.member;
 
 public enum Grade {
 
