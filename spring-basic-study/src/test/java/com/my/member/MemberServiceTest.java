@@ -1,4 +1,4 @@
-package com.my.springbasicstudy.member;
+package com.my.member;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
