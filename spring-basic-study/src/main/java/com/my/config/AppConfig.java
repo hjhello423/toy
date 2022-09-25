@@ -2,6 +2,7 @@ package com.my.config;
 
 import com.my.discount.DiscountPolicy;
 import com.my.discount.FixDiscountPolicy;
+import com.my.discount.RateDiscountPolicy;
 import com.my.member.MemberService;
 import com.my.member.MemberServiceImpl;
 import com.my.member.MemoryMemberRepository;
@@ -23,7 +24,8 @@ public class AppConfig {
     }
 
     private static DiscountPolicy getDiscountPolicy() {
-        return new FixDiscountPolicy();
+//        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 
 }
