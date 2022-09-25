@@ -1,5 +1,6 @@
 package com.my.config;
 
+import com.my.discount.DiscountPolicy;
 import com.my.discount.FixDiscountPolicy;
 import com.my.member.MemberService;
 import com.my.member.MemberServiceImpl;
@@ -21,7 +22,7 @@ public class AppConfig {
         return new OrderServiceImpl(memberRepository(), getDiscountPolicy());
     }
 
-    private static FixDiscountPolicy getDiscountPolicy() {
+    private static DiscountPolicy getDiscountPolicy() {
         return new FixDiscountPolicy();
     }
 
