@@ -4,8 +4,9 @@ import com.my.member.Grade;
 import com.my.member.Member;
 import com.my.member.MemberService;
 import com.my.member.MemberServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderServiceTest {
 
@@ -23,6 +24,6 @@ class OrderServiceTest {
         Order order = orderService.createOrder(memberId, "itemA", 10000);
 
         // then
-        Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
+        assertThat(order.getDiscountPrice()).isEqualTo(1000);
     }
 }
