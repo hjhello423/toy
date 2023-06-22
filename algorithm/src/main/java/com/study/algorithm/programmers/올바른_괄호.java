@@ -2,6 +2,9 @@ package com.study.algorithm.programmers;
 
 import java.util.Stack;
 
+/**
+ * https://school.programmers.co.kr/learn/courses/30/lessons/12909
+ */
 public class 올바른_괄호 {
 
     public static void main(String[] args) {
