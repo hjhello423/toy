@@ -24,7 +24,7 @@ public class 가장_큰_수 {
             return (o2 + o1).compareTo(o1 + o2);
         });
 
-        if ("0".equals(list.get(0))){
+        if ("0".equals(list.get(0))) {
             return "0";
         }
 
