@@ -1,32 +1,29 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.5'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
 group = 'com.my'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
-dependencyManagement {
-    imports {
-        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-    }
-}
-
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2") // JUnit 5 API
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2") // JUnit 5 Engine (테스트 실행)
+    testImplementation("org.assertj:assertj-core:3.25.3") // AssertJ (테스트 검증)
+    testImplementation("io.mockk:mockk:1.13.11") // MockK (Kotlin Mocking 라이브러리)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher") // JUnit 5 런처
+
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor "org.projectlombok:lombok:1.18.22"
-//    compileOnly 'org.projectlombok:lombok'
-//    annotationProcessor "org.projectlombok:lombok"
-
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
 
     testCompileOnly 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'

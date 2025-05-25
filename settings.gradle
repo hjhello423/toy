@@ -1,7 +1,6 @@
 rootProject.name = 'toy'
 
-include 'module-study-library'
-include 'module-study-application'
+include 'algorithm'
+include 'spring-basic-study'
 include 'study-design-pattern'
 include 'study-kafka'
-include 'spring-basic-study'
